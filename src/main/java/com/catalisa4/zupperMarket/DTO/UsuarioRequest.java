@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
@@ -19,6 +20,11 @@ public class UsuarioRequest {
     @Length(max = 60, message = "Apelido deve conter, no máximo, {max} caracteres.")
     private String apelido;
 
+    @NotBlank(message = "E-mail deve ser preenchido.")
+    @Length(max = 60, message = "E-mail deve conter, no máximo, {max} caracteres.")
+    @Email(message = "E-mail inválido.")
+    private String email;
+
     @Length(max = 60, message = "Celular deve conter, no máximo, {max} caracteres.")
     private String celular;
 
@@ -27,6 +33,6 @@ public class UsuarioRequest {
     private String senha;
 
     public UsuarioModel converterParaObjeto() {
-        return new UsuarioModel(nomeCompleto, apelido, celular, senha);
+        return new UsuarioModel(nomeCompleto, apelido, email, celular, senha);
     }
 }
