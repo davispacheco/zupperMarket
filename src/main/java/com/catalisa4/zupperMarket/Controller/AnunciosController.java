@@ -36,6 +36,10 @@ public class AnunciosController {
     public AnunciosModel cadastrarAnuncio(@RequestBody AnunciosModel anunciosModel){
         return  anunciosService.cadastrarNovoAnuncio(anunciosModel);
     }
+    @PutMapping (path = "/anuncios/{id}")
+    public AnunciosModel alterarAnuncio(@RequestBody AnunciosModel anunciosModel){
+        return anunciosService.altereAnuncio(anunciosModel);
+    }
 
     @DeleteMapping(path = "/anuncios/{id}")
     public void deletarAnuncio(@PathVariable Long id){

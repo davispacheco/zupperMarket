@@ -28,6 +28,10 @@ public class AnunciosService {
         return anunciosRepository.save(anunciosModel);
     }
 
+    public AnunciosModel altereAnuncio(AnunciosModel anunciosModel){
+        return anunciosRepository.save(anunciosModel);
+    }
+
     public void deleteAnuncio(Long codigo) {
         anunciosRepository.deleteById(codigo);
     }
