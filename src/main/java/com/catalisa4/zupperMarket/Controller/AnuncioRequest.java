@@ -3,6 +3,7 @@ package com.catalisa4.zupperMarket.Controller;
 import com.catalisa4.zupperMarket.Enum.Categorias;
 import com.catalisa4.zupperMarket.Enum.FormasDeEntrega;
 import com.catalisa4.zupperMarket.Enum.Status;
+import com.catalisa4.zupperMarket.Model.AnunciosModel;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -45,7 +46,11 @@ public class AnuncioRequest {
     String email;
 
 
-
+    public AnunciosModel toAnuncioModel(){
+        return new AnunciosModel(null, nomeDoTitulo, descricao, urlFoto, descricaoFoto,
+                valor, seNegociavel, categoria, quantidade, estado, cidade,
+                entrega, status);
+    }
 
 
 }
