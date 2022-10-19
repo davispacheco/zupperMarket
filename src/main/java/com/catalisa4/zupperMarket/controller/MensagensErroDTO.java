@@ -1,4 +1,4 @@
-package com.modulo6.miniprojetoRecirend.DTO;
+package com.catalisa4.zupperMarket.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

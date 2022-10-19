@@ -1,4 +1,4 @@
-package com.catalisa4.zupperMarket.DTO;
+package com.catalisa4.zupperMarket.controller;
 
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import lombok.Getter;
