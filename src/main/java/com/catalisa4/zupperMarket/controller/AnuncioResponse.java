@@ -1,9 +1,9 @@
-package com.catalisa4.zupperMarket.Controller;
+package com.catalisa4.zupperMarket.controller;
 
 import com.catalisa4.zupperMarket.Enum.Categorias;
 import com.catalisa4.zupperMarket.Enum.FormasDeEntrega;
 import com.catalisa4.zupperMarket.Enum.Status;
-import com.catalisa4.zupperMarket.Model.AnunciosModel;
+import com.catalisa4.zupperMarket.model.AnunciosModel;
 import lombok.*;
 
 @Getter

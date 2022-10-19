@@ -1,4 +1,4 @@
-package com.catalisa4.zupperMarket.Model;
+package com.catalisa4.zupperMarket.model;
 
 import com.catalisa4.zupperMarket.enums.Categorias;
 import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
