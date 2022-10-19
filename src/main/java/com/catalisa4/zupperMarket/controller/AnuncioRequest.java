@@ -47,7 +47,7 @@ public class AnuncioRequest {
 
 
     public AnunciosModel toAnuncioModel(){
-        return new AnunciosModel(null, nomeDoTitulo, descricao, urlFoto, descricaoFoto,
+        return new AnuncioModel(null, nomeDoTitulo, descricao, urlFoto, descricaoFoto,
                 valor, seNegociavel, categoria, quantidade, estado, cidade,
                 entrega, status);
     }
