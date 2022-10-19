@@ -19,16 +19,21 @@ public class UsuarioService {
         return iUsuarioRepository.save(usuarioModel);
     }
 
-    public Optional<UsuarioModel> exibirUsuarioPorId(Long id) {
-        return Optional.ofNullable(iUsuarioRepository.findById(id).orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado, impossivel efetuar busca pelo id " + id))));
+    public UsuarioModel exibirUsuarioPorId(Long id) {
+        Optional<UsuarioModel> obj = iUsuarioRepository.findById(id);
+        obj.orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado. " + id)));
+        return obj.get();
     }
 
     public UsuarioModel atualizarUsuarioCadastrado(UsuarioModel usuarioModel, Long id) {
-        iUsuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Erro: id não encontrado, não é possvel efetuar alteração" + id));
-        return iUsuarioRepository.save(usuarioModel);
+        UsuarioModel newUsuario = exibirUsuarioPorId(id);
+        newUsuario.setNomeCompleto(usuarioModel.getNomeCompleto());
+        newUsuario.setApelido(usuarioModel.getApelido());
+        newUsuario.setCelular(usuarioModel.getCelular());
+        return iUsuarioRepository.save(newUsuario);
     }
 
-    public void deletarUsuario(Long id){
+    public void deletarUsuario(Long id) {
         iUsuarioRepository.deleteById(id);
     }
 
