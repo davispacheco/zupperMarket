@@ -23,21 +23,21 @@ public class AnunciosController {
    /// }
 
 
-    @GetMapping (path = "/anuncio")
+    @GetMapping (path = "/anuncios")
     public List<AnunciosModel> buscarAnuncios (){
         return anunciosService.buscarTodosAnuncios();
     }
 
-    @GetMapping (path = "/anuncio/{id}")
-    public Optional<AnunciosModel> burscarAnuncioPorId (@PathVariable long id){
+    @GetMapping (path = "/anuncios/{id}")
+    public Optional<AnunciosModel> buscarAnuncioPorId(@PathVariable long id){
         return anunciosService.buscarPorId(id);
     }
-    @PostMapping(path = "/anuncio")
+    @PostMapping(path = "/anuncios")
     public AnunciosModel cadastrarAnuncio(@RequestBody AnunciosModel anunciosModel){
         return  anunciosService.cadastrarNovoAnuncio(anunciosModel);
     }
 
-    @DeleteMapping(path = "/anuncio/{id}")
+    @DeleteMapping(path = "/anuncios/{id}")
     public void deletarAnuncio(@PathVariable Long id){
         anunciosService.deleteAnuncio(id);
     }
