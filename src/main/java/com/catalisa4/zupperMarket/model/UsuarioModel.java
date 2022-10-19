@@ -22,7 +22,7 @@ public class UsuarioModel {
     @Column(nullable = false)
     private String apelido;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     private String celular;
