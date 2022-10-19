@@ -1,9 +1,9 @@
 package com.catalisa4.zupperMarket.ModelAnuncios;
 
 
-import com.catalisa4.zupperMarket.Enuns.Categorias;
-import com.catalisa4.zupperMarket.Enuns.FormasDeEntrega;
-import com.catalisa4.zupperMarket.Enuns.Status;
+import com.catalisa4.zupperMarket.enums.Categorias;
+import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
+import com.catalisa4.zupperMarket.enums.Status;
 import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
