@@ -27,6 +27,7 @@ public class UsuarioRequest {
     private String senha;
 
     public UsuarioModel converterParaObjeto() {
+
         return new UsuarioModel(nomeCompleto, apelido, celular, senha);
     }
 }
