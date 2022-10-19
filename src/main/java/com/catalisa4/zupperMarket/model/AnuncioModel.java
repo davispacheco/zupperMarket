@@ -64,6 +64,10 @@ public class AnuncioModel {
 
     private LocalDateTime dataHoraCriacao;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private UsuarioModel usuario;
+
     public String getNomeDoTitulo() {
         return nomeDoTitulo;
     }

@@ -1,10 +1,13 @@
 package com.catalisa4.zupperMarket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,6 +33,10 @@ public class UsuarioModel {
 
     @Column(length = 60, nullable = false)
     private String senha;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<AnuncioModel> anuncios = new ArrayList<>();
 
     public UsuarioModel(String nomeCompleto, String apelido, String email, String celular, String senha) {
         this.nomeCompleto = nomeCompleto;
