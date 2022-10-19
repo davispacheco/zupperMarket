@@ -1,6 +1,6 @@
-package com.catalisa4.zupperMarket.RepositoryAnuncios;
+package com.catalisa4.zupperMarket.Repository;
 
-import com.catalisa4.zupperMarket.ModelAnuncios.AnunciosModel;
+import com.catalisa4.zupperMarket.Model.AnunciosModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

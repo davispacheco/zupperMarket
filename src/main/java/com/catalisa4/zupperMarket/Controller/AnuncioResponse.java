@@ -1,8 +1,9 @@
-package com.catalisa4.zupperMarket.ModelAnuncios;
+package com.catalisa4.zupperMarket.Controller;
 
-import com.catalisa4.zupperMarket.Enuns.Categorias;
-import com.catalisa4.zupperMarket.Enuns.FormasDeEntrega;
-import com.catalisa4.zupperMarket.Enuns.Status;
+import com.catalisa4.zupperMarket.Enum.Categorias;
+import com.catalisa4.zupperMarket.Enum.FormasDeEntrega;
+import com.catalisa4.zupperMarket.Enum.Status;
+import com.catalisa4.zupperMarket.Model.AnunciosModel;
 import lombok.*;
 
 @Getter
@@ -33,7 +34,7 @@ public class AnuncioResponse {
         return new AnuncioResponse(anunciosModel.getId(), anunciosModel.getNomeDoTitulo(),
                 anunciosModel.getDescricao(), anunciosModel.getUrlFoto(), anunciosModel.getValor(),
                 anunciosModel.isSeNegociavel(), anunciosModel.getCategorias(), anunciosModel.getQuantidade(),
-                anunciosModel.getEstado(), anunciosModel.getCudade(), anunciosModel.getEntrega(),
+                anunciosModel.getEstado(), anunciosModel.getCidade(), anunciosModel.getEntrega(),
                 anunciosModel.getStatus());
 
                 }

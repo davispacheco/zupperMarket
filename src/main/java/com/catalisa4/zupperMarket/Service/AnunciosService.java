@@ -1,7 +1,7 @@
-package com.catalisa4.zupperMarket.ServiceAnuncios;
+package com.catalisa4.zupperMarket.Service;
 
-import com.catalisa4.zupperMarket.ModelAnuncios.AnunciosModel;
-import com.catalisa4.zupperMarket.RepositoryAnuncios.AnunciosRepository;
+import com.catalisa4.zupperMarket.Model.AnunciosModel;
+import com.catalisa4.zupperMarket.Repository.AnunciosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package com.catalisa4.zupperMarket.ControlleRAnuncios;
+package com.catalisa4.zupperMarket.Controller;
 
 
-import com.catalisa4.zupperMarket.ModelAnuncios.AnunciosModel;
-import com.catalisa4.zupperMarket.ServiceAnuncios.AnunciosService;
+import com.catalisa4.zupperMarket.Model.AnunciosModel;
+import com.catalisa4.zupperMarket.Service.AnunciosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

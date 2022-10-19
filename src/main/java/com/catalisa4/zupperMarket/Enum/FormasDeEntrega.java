@@ -1,4 +1,4 @@
-package com.catalisa4.zupperMarket.Enuns;
+package com.catalisa4.zupperMarket.Enum;
 
 public enum FormasDeEntrega {
 

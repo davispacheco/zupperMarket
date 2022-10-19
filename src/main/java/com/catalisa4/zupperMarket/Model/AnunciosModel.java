@@ -1,12 +1,10 @@
-package com.catalisa4.zupperMarket.ModelAnuncios;
+package com.catalisa4.zupperMarket.Model;
 
 
-import antlr.collections.List;
-import com.catalisa4.zupperMarket.Enuns.Categorias;
-import com.catalisa4.zupperMarket.Enuns.FormasDeEntrega;
-import com.catalisa4.zupperMarket.Enuns.Status;
+import com.catalisa4.zupperMarket.Enum.Categorias;
+import com.catalisa4.zupperMarket.Enum.FormasDeEntrega;
+import com.catalisa4.zupperMarket.Enum.Status;
 import lombok.*;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -54,7 +52,7 @@ public class AnunciosModel {
     private String estado;
 
     @Column(length = 30, nullable = false)
-    private String cudade;
+    private String cidade;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -136,12 +134,12 @@ public class AnunciosModel {
         this.estado = estado;
     }
 
-    public String getCudade() {
-        return cudade;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setCudade(String cudade) {
-        this.cudade = cudade;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public FormasDeEntrega getEntrega() {

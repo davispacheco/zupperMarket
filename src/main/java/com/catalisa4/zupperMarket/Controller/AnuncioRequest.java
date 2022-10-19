@@ -1,8 +1,8 @@
-package com.catalisa4.zupperMarket.ModelAnuncios;
+package com.catalisa4.zupperMarket.Controller;
 
-import com.catalisa4.zupperMarket.Enuns.Categorias;
-import com.catalisa4.zupperMarket.Enuns.FormasDeEntrega;
-import com.catalisa4.zupperMarket.Enuns.Status;
+import com.catalisa4.zupperMarket.Enum.Categorias;
+import com.catalisa4.zupperMarket.Enum.FormasDeEntrega;
+import com.catalisa4.zupperMarket.Enum.Status;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
