@@ -8,6 +8,7 @@ import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,22 +24,22 @@ public class AnunciosModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 60, nullable = false)
     private String  nomeDoTitulo;
 
     @Column(length = 300, nullable = false)
     private String descricao;
 
-    @Column(length = 30, nullable = false)
+    @Column(length = 60, nullable = false)
     private String urlFoto;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 300, nullable = false)
     private String descricaoFoto;
 
     @Column(length = 12, nullable = false)
     private double valor;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 5, nullable = false)
     private boolean seNegociavel;
 
     @Enumerated(EnumType.STRING)
@@ -61,6 +62,9 @@ public class AnunciosModel {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
+
+    @Column
+    private LocalDateTime dataHoraCriacao;
 
     public String getNomeDoTitulo() {
         return nomeDoTitulo;
