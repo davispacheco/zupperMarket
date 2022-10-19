@@ -26,4 +26,7 @@ public class UsuarioModel {
     private String email;
 
     private String celular;
+
+    @Column(nullable = false)
+    private String senha;
 }
