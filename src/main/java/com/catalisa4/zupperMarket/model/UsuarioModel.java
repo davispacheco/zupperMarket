@@ -29,4 +29,10 @@ public class UsuarioModel {
 
     @Column(nullable = false)
     private String senha;
+
+    public UsuarioModel(String nomeCompleto, String apelido, String email) {
+        this.nomeCompleto = nomeCompleto;
+        this.apelido = apelido;
+        this.email = email;
+    }
 }
