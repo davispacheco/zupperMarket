@@ -31,9 +31,11 @@ public class UsuarioModel {
     @Column(length = 60, nullable = false)
     private String senha;
 
-    public UsuarioModel(String nomeCompleto, String apelido, String email) {
+    public UsuarioModel(String nomeCompleto, String apelido, String email, String celular, String senha) {
         this.nomeCompleto = nomeCompleto;
         this.apelido = apelido;
         this.email = email;
+        this.celular = celular;
+        this.senha = senha;
     }
 }
