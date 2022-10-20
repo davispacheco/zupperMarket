@@ -49,13 +49,13 @@ public class UsuarioTest {
         startUsuario();
     }
 
-    @Test
+  /*  @Test
     @DisplayName("Testando o metodo de cadastrar")
     void testeSeCadastroDeUsuarioEstaFuncionando(){
         iUsuarioRepository.save(usuarioModel);
         when(iUsuarioRepository.existsBYEmail(Mockito.anyString())).thenReturn(true);
         Mockito.verify(iUsuarioRepository, Mockito.times(1)).save(usuarioModel);
-    }
+    }*/
 
     @Test
     @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
@@ -64,7 +64,7 @@ public class UsuarioTest {
         Assertions.assertTrue(true);
     }
 
-    //Testando método de buscar usuario por ID
+    //Testando mï¿½todo de buscar usuario por ID
 
 
     //Criando metodo para 'iniciar' os testes

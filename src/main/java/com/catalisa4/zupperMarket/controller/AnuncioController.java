@@ -19,7 +19,7 @@ public class AnuncioController {
     @Autowired
     AnuncioService anunciosService;
 
-    @GetMapping (path = "/anuncios")
+    @GetMapping
     public ResponseEntity<List<AnuncioResponse>> buscarAnuncios (){
         List<AnuncioModel> listaDeAnunciosModel = anunciosService.buscarTodosAnuncios();
         List<AnuncioResponse>  listaAnunciosResponse = new ArrayList<>();
@@ -30,24 +30,24 @@ public class AnuncioController {
         return ResponseEntity.ok(listaAnunciosResponse);
     }
 
-    @GetMapping (path = "/anuncios/{id}")
+    @GetMapping (path = "/{id}")
     public AnuncioModel buscarAnuncioPorId(@PathVariable Long id){
         return anunciosService.buscarPorId(id);
     }
-    @PostMapping(path = "/anuncios")
+    @PostMapping
     public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
         AnuncioModel anuncio = anunciosService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
         return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
     }
-    @PutMapping (path = "/anuncios/{id}")
+    @PutMapping (path = "/{id}")
     ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
         AnuncioModel anuncioAlterado = anunciosService.alterarAnuncio(anuncioRequest.toAnuncioModel(), anuncioRequest.toAnuncioModel().getId());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
-    @DeleteMapping(path = "/anuncios/{id}")
+    @DeleteMapping(path = "/{id}")
     public void deletarAnuncio(@PathVariable Long id){
         anunciosService.deletarAnuncio(id);
     }
