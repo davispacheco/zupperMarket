@@ -1,6 +1,6 @@
 package com.modulo6.miniprojetoRecirend.exception;
 
-import com.modulo6.miniprojetoRecirend.DTO.MensagensErroDTO;
+//import com.modulo6.miniprojetoRecirend.DTO.MensagensErroDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

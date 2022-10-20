@@ -12,6 +12,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
 @SpringBootTest
 public class UsuarioTest {
 
@@ -33,7 +39,8 @@ public class UsuarioTest {
     @DisplayName("Testando o metodo de cadastrar")
     void testeSeCadastroDeUsuarioEstaFuncionando(){
         iUsuarioRepository.save(usuarioModel);
-        Mockito.when((iUsuarioRepository.existsBYEmail(Mockito.anyString())));
-        Mockito.verify(iUsuarioRepository, Mockito.times(1));
+        when(iUsuarioRepository.existsBYEmail(Mockito.anyString())).thenReturn(true);
+        Mockito.verify(iUsuarioRepository, Mockito.times(1)).save(usuarioModel);
     }
+
 }
