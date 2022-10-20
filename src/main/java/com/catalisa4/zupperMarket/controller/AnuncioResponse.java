@@ -34,10 +34,6 @@ public class AnuncioResponse {
 
     private Status status;
 
-    public AnuncioResponse(Long id, String nomeDoTitulo, String descricao, String urlFoto, double valor, boolean seNegociavel, Categorias categorias, int quantidade, String estado, String cidade, FormasDeEntrega entrega, Status status) {
-        // verificar a necessidade desse construtor
-    }
-
     public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel) {
         return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(), anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategorias(), anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(), anuncioModel.getStatus());
 
