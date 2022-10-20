@@ -45,12 +45,8 @@ public class AnuncioRequest {
     @NotBlank(message = "Informe qual a forma de entrega do produto ou serviço.")
     private FormasDeEntrega entrega;
 
-    private Status status;
-
     public AnuncioModel toAnuncioModel() {
-        return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto,
-                valor, seNegociavel, categorias, quantidade, estado, cidade,
-                entrega, status, LocalDateTime.now());
+        return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categorias, quantidade, estado, cidade);
     }
 
 }
