@@ -21,16 +21,21 @@ public class AnuncioService {
         return iAnuncioRepository.findAll();
     }
 
-    public Optional<AnuncioModel> buscarPorId(Long id) {
-        return iAnuncioRepository.findById(id);
+    public AnuncioModel buscarPorId(Long id) {
+        Optional<AnuncioModel> obj = iAnuncioRepository.findById(id);
+        return obj.get();
     }
 
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel) {
         return iAnuncioRepository.save(anuncioModel);
     }
 
-    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel){
-        return iAnuncioRepository.save(anuncioModel);
+    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel, Long id) {
+        AnuncioModel newAnuncio = buscarPorId(id);
+        newAnuncio.setNomeDoTitulo(anuncioModel.getNomeDoTitulo());
+        newAnuncio.setDescricao(anuncioModel.getDescricao());
+        newAnuncio.setStatus(anuncioModel.getStatus());
+        return iAnuncioRepository.save(newAnuncio);
     }
 
     public void deletarAnuncio(Long id) {
