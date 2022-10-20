@@ -30,6 +30,8 @@ public class UsuarioTest {
     public static final String EMAIL = "katia@zup.com.br";
     public static final String CELULAR = "3499999999";
     public static final String SENHA = "1234";
+    public static final int ID = 1;
+
     @InjectMocks
     UsuarioService usuarioService;
 
@@ -43,6 +45,7 @@ public class UsuarioTest {
     @BeforeEach
     private void setUsuarioService() {
         MockitoAnnotations.openMocks(this);
+        //chamando metodo criado para inicio dos testes
         startUsuario();
     }
 
@@ -61,10 +64,10 @@ public class UsuarioTest {
         Assertions.assertTrue(true);
     }
 
+    //Criando metodo para 'iniciar' os testes
     private void startUsuario(){
         usuarioModel = new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
         optionalUsuarioModel = Optional.of(new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA));
-
     }
 
 
