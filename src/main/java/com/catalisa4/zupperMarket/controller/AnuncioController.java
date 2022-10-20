@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/anuncio")
+@RequestMapping(path = "/anuncios")
 public class AnuncioController {
 
     @Autowired
