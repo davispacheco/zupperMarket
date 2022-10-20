@@ -64,6 +64,9 @@ public class UsuarioTest {
         Assertions.assertTrue(true);
     }
 
+    //Testando método de buscar usuario por ID
+
+
     //Criando metodo para 'iniciar' os testes
     private void startUsuario(){
         usuarioModel = new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
