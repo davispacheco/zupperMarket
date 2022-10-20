@@ -24,7 +24,9 @@ public class AnuncioRequest {
     @NotBlank(message = "Anuncio deve conter valor, caso não tenha valor definido coloque 0 (zero) )")
     double valor;
 
+    @NotBlank
     boolean seNegociavel;
+    @NotBlank
     Categorias categoria;
 
     @NotBlank(message = "Insira a quantidade disponivel")
@@ -36,7 +38,9 @@ public class AnuncioRequest {
     @NotBlank(message = "Insira a cidade onde o objeto ou serviço está localizado(a)")
     String cidade;
 
+    @NotBlank
     FormasDeEntrega entrega;
+
     Status status;
 
     @NotBlank(message = "Apelido deve ser preenchido")
