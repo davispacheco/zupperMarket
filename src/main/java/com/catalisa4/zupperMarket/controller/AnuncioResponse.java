@@ -6,17 +6,13 @@ import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import lombok.*;
 
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class AnuncioResponse {
 
     private Long id;
 
     private String nomeDoTitulo;
-
-    private String descricao;
 
     private String urlFoto;
 
@@ -42,13 +38,9 @@ public class AnuncioResponse {
         // verificar a necessidade desse construtor
     }
 
-    public static AnuncioResponse fromAnunciosModel (AnuncioModel anuncioModel){
-        return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(),
-                anuncioModel.getDescricao(), anuncioModel.getUrlFoto(), anuncioModel.getValor(),
-                anuncioModel.isSeNegociavel(), anuncioModel.getCategorias(), anuncioModel.getQuantidade(),
-                anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
-                anuncioModel.getStatus());
+    public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel) {
+        return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(), anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategorias(), anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(), anuncioModel.getStatus());
 
-                }
+    }
 
 }
