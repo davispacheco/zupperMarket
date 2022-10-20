@@ -4,6 +4,7 @@ import com.catalisa4.zupperMarket.enums.Categorias;
 import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import lombok.*;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class AnuncioModel {
     private Long id;
 
     @Column(length = 60, nullable = false)
-    private String  nomeDoTitulo;
+    private String nomeDoTitulo;
 
     @Column(length = 300, nullable = false)
     private String descricao;
@@ -55,7 +56,6 @@ public class AnuncioModel {
     private FormasDeEntrega entrega;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Status status;
 
     private LocalDateTime dataHoraCriacao;
@@ -64,9 +64,7 @@ public class AnuncioModel {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel usuario;
 
-    public AnuncioModel(String nomeDoTitulo, String descricao, String urlFoto, String descricaoFoto, double valor,
-                        boolean seNegociavel, Categorias categorias, int quantidade, String estado, String cidade,
-                        FormasDeEntrega entrega, Status status, LocalDateTime dataHoraCriacao) {
+    public AnuncioModel(String nomeDoTitulo, String descricao, String urlFoto, String descricaoFoto, double valor, boolean seNegociavel, Categorias categorias, int quantidade, String estado, String cidade, FormasDeEntrega entrega) {
         this.nomeDoTitulo = nomeDoTitulo;
         this.descricao = descricao;
         this.urlFoto = urlFoto;
@@ -78,7 +76,5 @@ public class AnuncioModel {
         this.estado = estado;
         this.cidade = cidade;
         this.entrega = entrega;
-        this.status = status;
-        this.dataHoraCriacao = dataHoraCriacao;
     }
 }
