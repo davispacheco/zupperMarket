@@ -21,36 +21,39 @@ public class AnuncioRequest {
     String urlFoto;
     String descricaoFoto;
 
-    @NotBlank (message = "Anuncio deve conter valor, caso não tenha valor definido coloque 0 (zero) )")
+    @NotBlank(message = "Anuncio deve conter valor, caso não tenha valor definido coloque 0 (zero) )")
     double valor;
 
     boolean seNegociavel;
     Categorias categoria;
 
-    @NotBlank (message = "Insira a quantidade disponivel")
+    @NotBlank(message = "Insira a quantidade disponivel")
     int quantidade;
 
-    @NotBlank (message = "Insira o estado onde o objeto ou serviço está localizado(a)")
+    @NotBlank(message = "Insira o estado onde o objeto ou serviço está localizado(a)")
     String estado;
 
-    @NotBlank (message = "Insira a cidade onde o objeto ou serviço está localizado(a)")
+    @NotBlank(message = "Insira a cidade onde o objeto ou serviço está localizado(a)")
     String cidade;
 
     FormasDeEntrega entrega;
     Status status;
 
-    @NotBlank (message = "Apelido deve ser preenchido")
+    @NotBlank(message = "Apelido deve ser preenchido")
     String apelido;
 
-    @NotBlank (message = "Você deve inserir seu email zup")
+    @NotBlank(message = "Você deve inserir seu email zup")
     String email;
 
-
-    public AnunciosModel toAnuncioModel(){
-        return new AnuncioModel(null, nomeDoTitulo, descricao, urlFoto, descricaoFoto,
-                valor, seNegociavel, categoria, quantidade, estado, cidade,
-                entrega, status);
-    }
-
-
 }
+
+// ALTERAR ESSA PARTE POR CONTA DO LOCALDATETIME
+ /*   public AnuncioModel toAnuncioModel() {
+       *//* return new AnuncioModel(null, nomeDoTitulo, descricao, urlFoto, descricaoFoto,
+                valor, seNegociavel, categoria, quantidade, estado, cidade,
+                entrega, status);*//*
+        *//*  }*//*
+
+
+
+    }*/
