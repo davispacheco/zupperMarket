@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Setter
 @Validated
 @Entity
-@Table(name = "anuncio")
+@Table(name = "anuncios")
 
 public class AnuncioModel {
 
