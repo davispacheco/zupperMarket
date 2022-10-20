@@ -38,7 +38,8 @@ public class UsuarioService {
     }
 
     //Validação(Query method)
-    public boolean existsByEmail(String existsByEmail){
-        return iUsuarioRepository.existsBYEmail(existsByEmail);
+    public UsuarioModel buscarUsuarioPorEmail(String email) {
+        Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
+        return obj.get();
     }
 }
