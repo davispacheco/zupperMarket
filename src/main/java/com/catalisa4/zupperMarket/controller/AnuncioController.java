@@ -5,12 +5,12 @@ import com.catalisa4.zupperMarket.model.AnuncioModel;
 
 import com.catalisa4.zupperMarket.service.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/anuncios")
@@ -31,16 +31,20 @@ public class AnuncioController {
     }
 
     @GetMapping (path = "/anuncios/{id}")
-    public Optional<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id){
+    public AnuncioModel buscarAnuncioPorId(@PathVariable Long id){
         return anunciosService.buscarPorId(id);
     }
     @PostMapping(path = "/anuncios")
-    public AnuncioModel cadastrarAnuncio(@RequestBody AnuncioModel anunciosModel){
-        return  anunciosService.cadastrarNovoAnuncio(anunciosModel);
+    public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
+        AnuncioModel anuncio = anunciosService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel());
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
+        return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
     }
     @PutMapping (path = "/anuncios/{id}")
-    public AnuncioModel alterarAnuncio(@RequestBody AnuncioModel anunciosModel){
-        return anunciosService.alterarAnuncio(anunciosModel);
+    ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
+        AnuncioModel anuncioAlterado = anunciosService.alterarAnuncio(anuncioRequest.toAnuncioModel(), anuncioRequest.toAnuncioModel().getId());
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
+        return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
     @DeleteMapping(path = "/anuncios/{id}")
