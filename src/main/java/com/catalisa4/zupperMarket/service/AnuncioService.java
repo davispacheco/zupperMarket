@@ -17,7 +17,7 @@ public class AnuncioService {
     private static IAnuncioRepository iAnuncioRepository;
 
 
-    public static List<AnuncioModel> buscarTodosAnuncios() {
+    public List<AnuncioModel> buscarTodosAnuncios() {
         return iAnuncioRepository.findAll();
     }
 
@@ -36,5 +36,7 @@ public class AnuncioService {
     public void deletarAnuncio(Long id) {
         iAnuncioRepository.deleteById(id);
     }
+
+
 
 }

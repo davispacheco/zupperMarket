@@ -5,8 +5,10 @@ import com.catalisa4.zupperMarket.model.AnuncioModel;
 
 import com.catalisa4.zupperMarket.service.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +20,18 @@ public class AnuncioController {
     AnuncioService anunciosService;
 
     @GetMapping (path = "/anuncios")
-    public List<AnuncioModel> buscarAnuncios (){
-        return anunciosService.buscarTodosAnuncios();
+    public ResponseEntity<List<AnuncioResponse>> buscarAnuncios (){
+        List<AnuncioModel> listaDeAnunciosModel = anunciosService.buscarTodosAnuncios();
+        List<AnuncioResponse>  listaAnunciosResponse = new ArrayList<>();
+        for (AnuncioModel anuncioModel: listaDeAnunciosModel) {
+            AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioModel);
+            listaAnunciosResponse.add(anuncioResponse);
+        }
+        return ResponseEntity.ok(listaAnunciosResponse);
     }
 
     @GetMapping (path = "/anuncios/{id}")
-    public Optional<AnuncioModel> buscarAnuncioPorId(@PathVariable long id){
+    public Optional<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id){
         return anunciosService.buscarPorId(id);
     }
     @PostMapping(path = "/anuncios")
