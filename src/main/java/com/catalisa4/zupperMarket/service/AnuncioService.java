@@ -21,8 +21,9 @@ public class AnuncioService {
         return iAnuncioRepository.findAll();
     }
 
-    public Optional<AnuncioModel> buscarPorId(Long id) {
-        return iAnuncioRepository.findById(id);
+    public AnuncioModel buscarPorId(Long id) {
+        Optional<AnuncioModel> obj = iAnuncioRepository.findById(id);
+        return obj.get();
     }
 
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel) {
