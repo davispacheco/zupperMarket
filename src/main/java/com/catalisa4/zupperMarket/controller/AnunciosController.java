@@ -32,11 +32,11 @@ public class AnunciosController {
     }
     @PutMapping (path = "/anuncios/{id}")
     public AnuncioModel alterarAnuncio(@RequestBody AnuncioModel anunciosModel){
-        return anunciosService.altereAnuncio(anunciosModel);
+        return anunciosService.alterarAnuncio(anunciosModel);
     }
 
     @DeleteMapping(path = "/anuncios/{id}")
     public void deletarAnuncio(@PathVariable Long id){
-        anunciosService.deleteAnuncio(id);
+        anunciosService.deletarAnuncio(id);
     }
 }

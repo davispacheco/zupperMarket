@@ -14,27 +14,27 @@ import java.util.Optional;
 public class AnuncioService {
 
     @Autowired
-    private static IAnuncioRepository AnuncioRepository;
+    private static IAnuncioRepository iAnuncioRepository;
 
 
     public static List<AnuncioModel> buscarTodosAnuncios() {
-        return AnuncioRepository.findAll();
+        return iAnuncioRepository.findAll();
     }
 
-    public Optional<AnuncioModel> buscarPorId(long id) {
-        return AnuncioRepository.findById(id);
+    public Optional<AnuncioModel> buscarPorId(Long id) {
+        return iAnuncioRepository.findById(id);
     }
 
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel) {
-        return AnuncioRepository.save(anuncioModel);
+        return iAnuncioRepository.save(anuncioModel);
     }
 
-    public AnuncioModel altereAnuncio(AnuncioModel anuncioModel){
-        return AnuncioRepository.save(anuncioModel);
+    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel){
+        return iAnuncioRepository.save(anuncioModel);
     }
 
-    public void deleteAnuncio(Long id) {
-        AnuncioRepository.deleteById(id);
+    public void deletarAnuncio(Long id) {
+        iAnuncioRepository.deleteById(id);
     }
 
 }
