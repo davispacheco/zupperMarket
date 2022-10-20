@@ -4,8 +4,6 @@ import com.catalisa4.zupperMarket.enums.Categorias;
 import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import lombok.*;
-import org.springframework.validation.annotation.Validated;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -13,7 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Validated
 @Entity
 @Table(name = "anuncios")
 
