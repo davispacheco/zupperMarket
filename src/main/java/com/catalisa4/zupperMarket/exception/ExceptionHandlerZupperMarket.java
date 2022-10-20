@@ -1,6 +1,7 @@
-package com.modulo6.miniprojetoRecirend.exception;
+package com.catalisa4.zupperMarket.exception;
 
-import com.modulo6.miniprojetoRecirend.DTO.MensagensErroDTO;
+import com.catalisa4.zupperMarket.controller.MensagensErroDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
