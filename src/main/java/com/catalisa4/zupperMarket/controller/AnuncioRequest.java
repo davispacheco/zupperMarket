@@ -7,6 +7,7 @@ import com.catalisa4.zupperMarket.model.AnuncioModel;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -27,7 +28,7 @@ public class AnuncioRequest {
     @NotBlank
     boolean seNegociavel;
     @NotBlank
-    Categorias categoria;
+    Categorias categorias;
 
     @NotBlank(message = "Insira a quantidade disponivel")
     int quantidade;
@@ -49,15 +50,11 @@ public class AnuncioRequest {
     @NotBlank(message = "Você deve inserir seu email zup")
     String email;
 
+
+    public AnuncioModel toAnuncioModel() {
+        return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto,
+                valor, seNegociavel, categorias, quantidade, estado, cidade,
+                entrega, status, LocalDateTime.now());
+    }
+
 }
-
-// ALTERAR ESSA PARTE POR CONTA DO LOCALDATETIME
- /*   public AnuncioModel toAnuncioModel() {
-       *//* return new AnuncioModel(null, nomeDoTitulo, descricao, urlFoto, descricaoFoto,
-                valor, seNegociavel, categoria, quantidade, estado, cidade,
-                entrega, status);*//*
-        *//*  }*//*
-
-
-
-    }*/
