@@ -14,42 +14,38 @@ import java.time.LocalDateTime;
 @Setter
 public class AnuncioRequest {
 
-    @NotBlank(message = "Anuncio deve conter titulo")
-    String nomeDoTitulo;
+    @NotBlank(message = "Anúncio deve conter título.")
+    private String nomeDoTitulo;
 
-    @NotBlank(message = "Anuncio deve conter descricao")
-    String descricao;
-    String urlFoto;
-    String descricaoFoto;
+    @NotBlank(message = "Anúncio deve conter descrição.")
+    private String descricao;
 
-    @NotBlank(message = "Anuncio deve conter valor, caso não tenha valor definido coloque 0 (zero) )")
-    double valor;
+    private String urlFoto;
 
-    @NotBlank
-    boolean seNegociavel;
-    @NotBlank
-    Categorias categorias;
+    private String descricaoFoto;
 
-    @NotBlank(message = "Insira a quantidade disponivel")
-    int quantidade;
+    @NotBlank(message = "Anúncio deve conter valor. Caso não tenha valor definido, coloque 0 (zero).")
+    private double valor;
 
-    @NotBlank(message = "Insira o estado onde o objeto ou serviço está localizado(a)")
-    String estado;
+    @NotBlank(message = "Defina se o valor é negociável ou não.")
+    private boolean seNegociavel;
 
-    @NotBlank(message = "Insira a cidade onde o objeto ou serviço está localizado(a)")
-    String cidade;
+    @NotBlank(message = "Informe a categoria do anúncio.")
+    private Categorias categorias;
 
-    @NotBlank
-    FormasDeEntrega entrega;
+    @NotBlank(message = "Insira a quantidade disponível.")
+    private int quantidade;
 
-    Status status;
+    @NotBlank(message = "Insira o estado onde o objeto ou serviço está localizado.")
+    private String estado;
 
-    @NotBlank(message = "Apelido deve ser preenchido")
-    String apelido;
+    @NotBlank(message = "Insira a cidade onde o objeto ou serviço está localizado.")
+    private String cidade;
 
-    @NotBlank(message = "Você deve inserir seu email zup")
-    String email;
+    @NotBlank(message = "Informe qual a forma de entrega do produto ou serviço.")
+    private FormasDeEntrega entrega;
 
+    private Status status;
 
     public AnuncioModel toAnuncioModel() {
         return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto,
