@@ -4,11 +4,11 @@ import com.catalisa4.zupperMarket.enums.Categorias;
 import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
+import com.catalisa4.zupperMarket.model.UsuarioModel;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
-
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -44,6 +44,9 @@ public class AnuncioRequest {
 
     @NotBlank(message = "Informe qual a forma de entrega do produto ou serviço.")
     private FormasDeEntrega entrega;
+
+    @NotNull(message = "Usuário deve ser preenchido.")
+    private UsuarioModel usuario;
 
     public AnuncioModel toAnuncioModel() {
         return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categorias,
