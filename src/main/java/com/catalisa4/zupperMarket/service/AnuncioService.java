@@ -1,7 +1,8 @@
-package com.catalisa4.zupperMarket.Service;
+package com.catalisa4.zupperMarket.service;
 
-import com.catalisa4.zupperMarket.model.AnunciosModel;
-import com.catalisa4.zupperMarket.Repository.AnunciosRepository;
+
+import com.catalisa4.zupperMarket.model.AnuncioModel;
+import com.catalisa4.zupperMarket.repository.IAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -13,27 +14,27 @@ import java.util.Optional;
 public class AnuncioService {
 
     @Autowired
-    private static AnunciosRepository anunciosRepository;
+    private static IAnuncioRepository AnuncioRepository;
 
 
-    public static List<AnunciosModel> buscarTodosAnuncios() {
-        return anunciosRepository.findAll();
+    public static List<AnuncioModel> buscarTodosAnuncios() {
+        return AnuncioRepository.findAll();
     }
 
-    public Optional<AnunciosModel> buscarPorId(long id) {
-        return anunciosRepository.findById(id);
+    public Optional<AnuncioModel> buscarPorId(long id) {
+        return AnuncioRepository.findById(id);
     }
 
-    public AnunciosModel cadastrarNovoAnuncio(AnunciosModel anunciosModel) {
-        return anunciosRepository.save(anunciosModel);
+    public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel) {
+        return AnuncioRepository.save(anuncioModel);
     }
 
-    public AnunciosModel altereAnuncio(AnunciosModel anunciosModel){
-        return anunciosRepository.save(anunciosModel);
+    public AnuncioModel altereAnuncio(AnuncioModel anuncioModel){
+        return AnuncioRepository.save(anuncioModel);
     }
 
-    public void deleteAnuncio(Long codigo) {
-        anunciosRepository.deleteById(codigo);
+    public void deleteAnuncio(Long id) {
+        AnuncioRepository.deleteById(id);
     }
 
 }

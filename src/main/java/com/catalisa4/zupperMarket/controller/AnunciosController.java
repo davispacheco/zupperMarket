@@ -1,8 +1,9 @@
 package com.catalisa4.zupperMarket.controller;
 
 
-import com.catalisa4.zupperMarket.model.AnunciosModel;
-import com.catalisa4.zupperMarket.Service.AnunciosService;
+import com.catalisa4.zupperMarket.model.AnuncioModel;
+
+import com.catalisa4.zupperMarket.service.AnuncioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,30 +15,23 @@ import java.util.Optional;
 public class AnunciosController {
 
     @Autowired
-    AnunciosService anunciosService;
-
-    //Cadastro de Anuncio//
- //   @PostMapping(path = "/anuncio/{id}")
-   // public ResponseEntity <AnunciosModel>cadastrarAnuncio(@RequestBody AnunciosModel cadastreAnuncio, @PathVariable Long id){
-     //   AnunciosModel novoAnuncio =
-   /// }
-
+    AnuncioService anunciosService;
 
     @GetMapping (path = "/anuncios")
-    public List<AnunciosModel> buscarAnuncios (){
+    public List<AnuncioModel> buscarAnuncios (){
         return anunciosService.buscarTodosAnuncios();
     }
 
     @GetMapping (path = "/anuncios/{id}")
-    public Optional<AnunciosModel> buscarAnuncioPorId(@PathVariable long id){
+    public Optional<AnuncioModel> buscarAnuncioPorId(@PathVariable long id){
         return anunciosService.buscarPorId(id);
     }
     @PostMapping(path = "/anuncios")
-    public AnunciosModel cadastrarAnuncio(@RequestBody AnunciosModel anunciosModel){
+    public AnuncioModel cadastrarAnuncio(@RequestBody AnuncioModel anunciosModel){
         return  anunciosService.cadastrarNovoAnuncio(anunciosModel);
     }
     @PutMapping (path = "/anuncios/{id}")
-    public AnunciosModel alterarAnuncio(@RequestBody AnunciosModel anunciosModel){
+    public AnuncioModel alterarAnuncio(@RequestBody AnuncioModel anunciosModel){
         return anunciosService.altereAnuncio(anunciosModel);
     }
 
