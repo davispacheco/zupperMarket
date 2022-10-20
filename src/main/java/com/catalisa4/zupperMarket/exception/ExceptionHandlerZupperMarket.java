@@ -1,7 +1,6 @@
 package com.catalisa4.zupperMarket.exception;
 
 import com.catalisa4.zupperMarket.controller.MensagensErroDTO;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
