@@ -12,20 +12,31 @@ import lombok.*;
 @NoArgsConstructor
 public class AnuncioResponse {
 
-    String nomeDoTitulo;
-    String descricao;
-    String urlFoto;
-    String descricaoFoto;
-    double valor;
-    boolean seNegociavel;
-    Categorias categorias;
-    int quantidade;
-    String estado;
-    String cidade;
-    FormasDeEntrega entrega;
-    Status status;
-    String apelido;
-    String email;
+    private Long id;
+
+    private String nomeDoTitulo;
+
+    private String descricao;
+
+    private String urlFoto;
+
+    private String descricaoFoto;
+
+    private double valor;
+
+    private boolean seNegociavel;
+
+    private Categorias categorias;
+
+    private int quantidade;
+
+    private String estado;
+
+    private String cidade;
+
+    private FormasDeEntrega entrega;
+
+    private Status status;
 
     public AnuncioResponse(Long id, String nomeDoTitulo, String descricao, String urlFoto, double valor, boolean seNegociavel, Categorias categorias, int quantidade, String estado, String cidade, FormasDeEntrega entrega, Status status) {
         // verificar a necessidade desse construtor
