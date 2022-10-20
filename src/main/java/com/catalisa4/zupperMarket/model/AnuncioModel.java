@@ -7,9 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@NoArgsConstructor
 @Setter
 @Entity
 @Table(name = "anuncios")
