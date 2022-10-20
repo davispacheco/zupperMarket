@@ -46,7 +46,7 @@ public class AnuncioRequest {
     private FormasDeEntrega entrega;
 
     public AnuncioModel toAnuncioModel() {
-        return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categorias, quantidade, estado, cidade);
+        return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categorias, quantidade, estado, cidade, entrega);
     }
 
 }
