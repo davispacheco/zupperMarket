@@ -1,7 +1,5 @@
 package com.catalisa4.zupperMarket.controller;
 
-import com.catalisa4.zupperMarket.DTO.UsuarioRequest;
-import com.catalisa4.zupperMarket.DTO.UsuarioResponse;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PutMapping(path = "/{id}")
-    public ResponseEntity<UsuarioResponse> atualizarUsuario(@PathVariable Long id) {
+    public ResponseEntity<UsuarioResponse> atualizarUsuario(@RequestBody UsuarioModel usuarioModel, @PathVariable Long id) {
         UsuarioModel usuario = usuarioService.atualizarUsuarioCadastrado(id);
         return ResponseEntity.ok(UsuarioResponse.converterParaResponse(usuario));
     }
