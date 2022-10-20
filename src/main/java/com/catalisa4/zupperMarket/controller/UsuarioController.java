@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/usuarios")
 public class UsuarioController {
@@ -14,7 +16,7 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping
-    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@RequestBody UsuarioRequest usuarioRequest) {
+    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
         UsuarioModel usuario = usuarioService.cadastrar(usuarioRequest.converterParaObjeto());
         return ResponseEntity.ok(UsuarioResponse.converterParaResponse(usuario));
     }

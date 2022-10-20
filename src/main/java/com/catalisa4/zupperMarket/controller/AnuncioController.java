@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class AnuncioController {
     }
 
     @PostMapping
-    public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
+    public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@Valid @RequestBody AnuncioRequest anuncioRequest){
         AnuncioModel anuncio = anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
         return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
