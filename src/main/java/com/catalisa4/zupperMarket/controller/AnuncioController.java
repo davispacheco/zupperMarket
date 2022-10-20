@@ -17,11 +17,11 @@ import java.util.List;
 public class AnuncioController {
 
     @Autowired
-    AnuncioService anunciosService;
+    private AnuncioService anuncioService;
 
     @GetMapping
     public ResponseEntity<List<AnuncioResponse>> buscarAnuncios (){
-        List<AnuncioModel> listaDeAnunciosModel = anunciosService.buscarTodosAnuncios();
+        List<AnuncioModel> listaDeAnunciosModel = anuncioService.buscarTodosAnuncios();
         List<AnuncioResponse>  listaAnunciosResponse = new ArrayList<>();
         for (AnuncioModel anuncioModel: listaDeAnunciosModel) {
             AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioModel);
@@ -32,23 +32,26 @@ public class AnuncioController {
 
     @GetMapping (path = "/{id}")
     public AnuncioModel buscarAnuncioPorId(@PathVariable Long id){
-        return anunciosService.buscarPorId(id);
+        return anuncioService.buscarPorId(id);
     }
+
     @PostMapping
     public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
-        AnuncioModel anuncio = anunciosService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel());
+        AnuncioModel anuncio = anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
         return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
     }
+
     @PutMapping (path = "/{id}")
-    ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest){
-        AnuncioModel anuncioAlterado = anunciosService.alterarAnuncio(anuncioRequest.toAnuncioModel(), anuncioRequest.toAnuncioModel().getId());
+    public ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest, @PathVariable Long id) {
+        AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel(), id);
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deletarAnuncio(@PathVariable Long id){
-        anunciosService.deletarAnuncio(id);
+    public ResponseEntity<?> deletarAnuncio(@PathVariable Long id) {
+        anuncioService.deletarAnuncio(id);
+        return ResponseEntity.noContent().build();
     }
 }
