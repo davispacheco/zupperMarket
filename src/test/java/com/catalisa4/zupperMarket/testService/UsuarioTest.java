@@ -25,12 +25,13 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class UsuarioTest {
 
+    public int id = 1;
     public static final String NOME_COMPLETO = "Katia Queiroz";
     public static final String APELIDO = "katinha";
     public static final String EMAIL = "katia@zup.com.br";
     public static final String CELULAR = "3499999999";
     public static final String SENHA = "1234";
-    public static final int ID = 1;
+
 
     @InjectMocks
     UsuarioService usuarioService;
@@ -57,14 +58,26 @@ public class UsuarioTest {
         Mockito.verify(iUsuarioRepository, Mockito.times(1)).save(usuarioModel);
     }*/
 
-    @Test
-    @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
-    void testeDeBuscarUsuarioViaId() {
-        usuarioService.exibirUsuarioPorId(1L);
-        Assertions.assertTrue(true);
-    }
+//    @Test
+//    @DisplayName("O teste deve retornar true, se o metodo de buscar por id estiver funcionando corretamente")
+//    void testeDeBuscarUsuarioViaId() {
+//        usuarioService.exibirUsuarioPorId(1L);
+//        Assertions.assertTrue(true);
+//    }
 
-    //Testando m�todo de buscar usuario por ID
+    //Testando metodo para verificar email
+
+    //Testando metodo de buscar usuario por ID
+    @Test
+    void quandoFizerABuscaPorIdRetornarAInstanciaDeUmUsuario(){
+        Mockito.when(iUsuarioRepository.findById(Mockito.anyLong())).thenReturn(optionalUsuarioModel);
+
+        //fazendo a chamada do metodo
+        UsuarioModel response = usuarioService.exibirUsuarioPorId(Long.valueOf(id));
+
+        //teste para confirmar a classe chamada
+        Assertions.assertEquals(UsuarioModel.class, response.getClass());
+    }
 
 
     //Criando metodo para 'iniciar' os testes
