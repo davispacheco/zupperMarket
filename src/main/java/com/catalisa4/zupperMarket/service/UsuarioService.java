@@ -1,5 +1,6 @@
 package com.catalisa4.zupperMarket.service;
 
+import com.catalisa4.zupperMarket.exception.DataIntegratyViolationException;
 import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IUsuarioRepository;
@@ -16,9 +17,9 @@ public class UsuarioService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
-    public UsuarioModel cadastrar(UsuarioModel usuarioModel){
+    public UsuarioModel cadastrar(UsuarioModel usuarioModel) {
         Optional<UsuarioModel> obj = buscarUsuarioPorEmail(usuarioModel.getEmail());
-        if (obj.isPresent()){
+        if (obj.isPresent()) {
             throw new DataIntegrityViolationException("E-mail já cadastrado");
         }
 
@@ -43,10 +44,21 @@ public class UsuarioService {
         iUsuarioRepository.deleteById(id);
     }
 
+    public void validarEmailInexistente(UsuarioModel usuarioModel, String email) {
+        if (!email.equalsIgnoreCase(usuarioModel.getEmail())) {
+            throw new EntityNotFoundException("E-mail não encontrado: " + email);
+        }
+    }
+
+    public void validarEmailExistente(UsuarioModel usuarioModel, String email) {
+        if (email.equalsIgnoreCase(usuarioModel.getEmail())) {
+            throw new DataIntegratyViolationException("E-mail já existe!");
+        }
+    }
+
     //Validação(Query method)
-    public Optional<UsuarioModel> buscarUsuarioPorEmail(String email) {
+    public UsuarioModel buscarUsuarioPorEmail(String email) {
         Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
-        //obj.orElseThrow((() -> new EntityNotFoundException("Erro: e-mail não encontrado. " + email)));
-        return obj;
+        return obj.get();
     }
 }
