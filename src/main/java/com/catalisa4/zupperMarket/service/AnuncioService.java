@@ -1,12 +1,14 @@
 package com.catalisa4.zupperMarket.service;
 
 
+import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.repository.IAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +16,7 @@ import java.util.Optional;
 public class AnuncioService {
 
     @Autowired
-    private static IAnuncioRepository iAnuncioRepository;
+    private IAnuncioRepository iAnuncioRepository;
 
 
     public List<AnuncioModel> buscarTodosAnuncios() {
@@ -27,6 +29,8 @@ public class AnuncioService {
     }
 
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel) {
+        anuncioModel.setStatus(Status.DISPONIVEL);
+        anuncioModel.setDataHoraCriacao(LocalDateTime.now());
         return iAnuncioRepository.save(anuncioModel);
     }
 
