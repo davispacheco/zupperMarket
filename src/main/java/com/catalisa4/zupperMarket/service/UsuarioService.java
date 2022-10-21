@@ -42,9 +42,14 @@ public class UsuarioService {
     //Validação(Query method)
     public UsuarioModel buscarUsuarioPorEmail(String email) {
         Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
+<<<<<<< HEAD
         if (obj.isPresent()){
             throw new DataIntegrityViolationException("E-mail já cadastrado");
         }
         //return obj.get();
+=======
+        obj.orElseThrow((() -> new EntityNotFoundException("Erro: e-mail não encontrado. " + email)));
+        return obj.get();
+>>>>>>> c848dd90e81386f905f29907b972ad1ca278b761
     }
 }
