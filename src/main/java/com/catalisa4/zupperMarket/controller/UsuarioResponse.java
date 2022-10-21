@@ -19,11 +19,11 @@ public class UsuarioResponse {
 
     private String email;
 
-    public static UsuarioResponse converterParaResponse(UsuarioModel usuario) {
+    public static UsuarioResponse fromUsuarioModel(UsuarioModel usuario) {
         return new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getEmail());
     }
 
-    public static List<UsuarioResponse> converterLista(List<UsuarioModel> usuarios) {
+    public static List<UsuarioResponse> toUsuarioModelList(List<UsuarioModel> usuarios) {
         List<UsuarioResponse> novaLista = new ArrayList<>();
         for (UsuarioModel usuario : usuarios) {
             UsuarioResponse novoUsuario = new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getEmail());

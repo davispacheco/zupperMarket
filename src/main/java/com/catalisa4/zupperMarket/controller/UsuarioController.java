@@ -18,14 +18,14 @@ public class UsuarioController {
     @PostMapping
     public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
         UsuarioModel usuario = usuarioService.cadastrar(usuarioRequest.toUsuarioModel());
-        return ResponseEntity.ok(UsuarioResponse.converterParaResponse(usuario));
+        return ResponseEntity.ok(UsuarioResponse.fromUsuarioModel(usuario));
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PutMapping(path = "/{id}")
     public ResponseEntity<UsuarioResponse> atualizarUsuario(@RequestBody UsuarioModel usuarioModel, @PathVariable Long id) {
         UsuarioModel usuario = usuarioService.atualizarUsuarioCadastrado(usuarioModel, id);
-        return ResponseEntity.ok(UsuarioResponse.converterParaResponse(usuario));
+        return ResponseEntity.ok(UsuarioResponse.fromUsuarioModel(usuario));
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
