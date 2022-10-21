@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -32,8 +31,7 @@ public class UsuarioRequest {
     @Length(min = 8, max = 60, message = "Senha deve conter, no mínimo, {min} e, no máximo, {max} caracteres.")
     private String senha;
 
-    public UsuarioModel converterParaObjeto() {
-
+    public UsuarioModel toUsuarioModel() {
         return new UsuarioModel(nomeCompleto, apelido, email, celular, senha);
 
     }
