@@ -6,6 +6,9 @@ import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class AnuncioResponse {
@@ -42,4 +45,12 @@ public class AnuncioResponse {
 
     }
 
+    public static List<AnuncioResponse> fromAnuncioModelList(List<AnuncioModel> anuncios) {
+        List<AnuncioResponse> novaLista = new ArrayList<>();
+        for (AnuncioModel anuncio : anuncios) {
+            AnuncioResponse novoAnuncio = AnuncioResponse.fromAnuncioModel(anuncio);
+            novaLista.add(novoAnuncio);
+        }
+        return novaLista;
+    }
 }

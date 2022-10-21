@@ -23,12 +23,7 @@ public class AnuncioController {
     @GetMapping
     public ResponseEntity<List<AnuncioResponse>> buscarAnuncios (){
         List<AnuncioModel> listaDeAnunciosModel = anuncioService.buscarTodosAnuncios();
-        List<AnuncioResponse>  listaAnunciosResponse = new ArrayList<>();
-        for (AnuncioModel anuncioModel: listaDeAnunciosModel) {
-            AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioModel);
-            listaAnunciosResponse.add(anuncioResponse);
-        }
-        return ResponseEntity.ok(listaAnunciosResponse);
+        return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(listaDeAnunciosModel));
     }
 
     @GetMapping (path = "/{id}")

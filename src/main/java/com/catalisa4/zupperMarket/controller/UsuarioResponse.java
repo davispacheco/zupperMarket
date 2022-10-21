@@ -23,7 +23,7 @@ public class UsuarioResponse {
         return new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getEmail());
     }
 
-    public static List<UsuarioResponse> toUsuarioModelList(List<UsuarioModel> usuarios) {
+    public static List<UsuarioResponse> fromUsuarioModelList(List<UsuarioModel> usuarios) {
         List<UsuarioResponse> novaLista = new ArrayList<>();
         for (UsuarioModel usuario : usuarios) {
             UsuarioResponse novoUsuario = new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getEmail());
