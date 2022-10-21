@@ -9,7 +9,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
+@AllArgsConstructor
 @Getter
 @Setter
 public class AnuncioRequest {
