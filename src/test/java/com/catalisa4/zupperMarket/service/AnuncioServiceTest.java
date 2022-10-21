@@ -1,28 +1,22 @@
-package com.catalisa4.zupperMarket.testService;
+package com.catalisa4.zupperMarket.service;
 
-import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IAnuncioRepository;
-import com.catalisa4.zupperMarket.service.AnuncioService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static com.catalisa4.zupperMarket.enums.Categorias.TECNOLOGIA;
 import static com.catalisa4.zupperMarket.enums.FormasDeEntrega.TRANSPORTADORA;
 import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 
-public class AnuncioTest {
+public class AnuncioServiceTest {
     //Alterar para AnuncioServiceTest
 
     public static final String nomeDoTitulo = "Katia Queiroz";
