@@ -17,7 +17,11 @@ public class UsuarioService {
     private IUsuarioRepository iUsuarioRepository;
 
     public UsuarioModel cadastrar(UsuarioModel usuarioModel){
-        buscarUsuarioPorEmail(usuarioModel.getEmail());
+        Optional<UsuarioModel> obj = buscarUsuarioPorEmail(usuarioModel.getEmail());
+        if (obj.isPresent()){
+            throw new DataIntegrityViolationException("E-mail já cadastrado");
+        }
+
         return iUsuarioRepository.save(usuarioModel);
     }
 
@@ -40,12 +44,9 @@ public class UsuarioService {
     }
 
     //Validação(Query method)
-    public UsuarioModel buscarUsuarioPorEmail(String email) {
+    public Optional<UsuarioModel> buscarUsuarioPorEmail(String email) {
         Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
-        if (obj.isPresent()){
-            throw new DataIntegrityViolationException("E-mail já cadastrado");
-        }
-        obj.orElseThrow((() -> new EntityNotFoundException("Erro: e-mail não encontrado. " + email)));
-        return obj.get();
+        //obj.orElseThrow((() -> new EntityNotFoundException("Erro: e-mail não encontrado. " + email)));
+        return obj;
     }
 }
