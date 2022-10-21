@@ -118,6 +118,10 @@ public class UsuarioTest {
         assertEquals(EMAIL, responseEmail.getEmail());
     }
 
+    //teste do metodo de cadastro do usuario
+    @Test
+
+
 
 
     //Criando metodo para 'iniciar' os testes

@@ -14,8 +14,11 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class ExceptionHandlerZupperMarket extends ResponseEntityExceptionHandler {
@@ -35,6 +38,15 @@ public class ExceptionHandlerZupperMarket extends ResponseEntityExceptionHandler
         for (FieldError campo: ex.getFieldErrors()) {
             mensagem = mensagem + campo.getField() + ": " + campo.getDefaultMessage() + "\n";
         }
+        return handleExceptionInternal(ex, new MensagensErroDTO(mensagem), headers, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(DataIntegratyViolationException.class)
+    protected ResponseEntity<Object>dataIntegratyViolationException(DataIntegratyViolationException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+        String mensagem = "";
+//        for (FieldError campo: ex.getFieldErrors()) {
+//            mensagem = mensagem + campo.getField() + ": " + campo.getDefaultMessage() + "\n";
+//        }
         return handleExceptionInternal(ex, new MensagensErroDTO(mensagem), headers, HttpStatus.BAD_REQUEST, request);
     }
 

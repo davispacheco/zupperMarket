@@ -4,6 +4,7 @@ import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 
@@ -16,6 +17,7 @@ public class UsuarioService {
     private IUsuarioRepository iUsuarioRepository;
 
     public UsuarioModel cadastrar(UsuarioModel usuarioModel){
+        buscarUsuarioPorEmail(usuarioModel.getEmail());
         return iUsuarioRepository.save(usuarioModel);
     }
 
@@ -40,6 +42,9 @@ public class UsuarioService {
     //Validação(Query method)
     public UsuarioModel buscarUsuarioPorEmail(String email) {
         Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
-        return obj.get();
+        if (obj.isPresent()){
+            throw new DataIntegrityViolationException("E-mail já cadastrado");
+        }
+        //return obj.get();
     }
 }
