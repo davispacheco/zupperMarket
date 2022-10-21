@@ -18,11 +18,8 @@ public class UsuarioService {
     private IUsuarioRepository iUsuarioRepository;
 
     public UsuarioModel cadastrar(UsuarioModel usuarioModel) {
-        Optional<UsuarioModel> obj = buscarUsuarioPorEmail(usuarioModel.getEmail());
-        if (obj.isPresent()) {
-            throw new DataIntegrityViolationException("E-mail já cadastrado");
-        }
-
+        UsuarioModel obj = buscarUsuarioPorEmail(usuarioModel.getEmail());
+        validarEmailExistente(obj, usuarioModel.getEmail());
         return iUsuarioRepository.save(usuarioModel);
     }
 
