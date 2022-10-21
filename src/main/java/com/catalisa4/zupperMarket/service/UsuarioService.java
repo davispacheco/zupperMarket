@@ -40,6 +40,7 @@ public class UsuarioService {
     //Validação(Query method)
     public UsuarioModel buscarUsuarioPorEmail(String email) {
         Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
+        obj.orElseThrow((() -> new EntityNotFoundException("Erro: e-mail não encontrado. " + email)));
         return obj.get();
     }
 }
