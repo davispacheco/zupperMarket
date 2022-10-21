@@ -23,17 +23,16 @@ import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class UsuarioTest {
 
     public static final int id = 1;
-    public static final String NOME_COMPLETO = "Katia Queiroz";
-    public static final String APELIDO = "katinha";
-    public static final String EMAIL = "katia@zup.com.br";
+    public static final String NOME_COMPLETO = "Usuario Zupper";
+    public static final String APELIDO = "zuppinhx";
+    public static final String EMAIL = "usuario@zup.com.br";
     public static final String CELULAR = "3499999999";
     public static final String SENHA = "1234";
     public static final String ERRO_ID_NAO_ENCONTRADO = "Erro: id não encontrado. ";
@@ -75,10 +74,10 @@ public class UsuarioTest {
 
     //Testando metodo de buscar usuario por ID
     @Test
-    void quandoFizerABuscaPorIdRetornarAInstanciaDeUmUsuario(){
+    void quandoFizerABuscaPorId(){
         when(iUsuarioRepository.findById(anyLong())).thenReturn(optionalUsuarioModel);
 
-        //fazendo a chamada do metodo
+        //criando o objeto para chamar o metodo
         UsuarioModel response = usuarioService.exibirUsuarioPorId(Long.valueOf(id));
 
         //teste para confirmar que o objeto criado não é nulo
@@ -101,6 +100,24 @@ public class UsuarioTest {
             assertEquals(ERRO_ID_NAO_ENCONTRADO, ex.getMessage());
         }
     }
+
+    //Teste para verificar busca por email
+    @Test
+    void quandoFizerABuscaPorEmail(){
+        when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
+
+        //criando o objeto para chamar o metodo
+        UsuarioModel responseEmail = usuarioService.buscarUsuarioPorEmail(EMAIL);
+
+        //teste para confirmar que o objeto criado não é nulo
+        assertNotNull(responseEmail);
+
+        //teste para confirmar a classe chamada
+        assertEquals(UsuarioModel.class, responseEmail.getClass());
+        //teste para confirmar o retorno do metodo
+        assertEquals(EMAIL, responseEmail.getEmail());
+    }
+
 
 
     //Criando metodo para 'iniciar' os testes
