@@ -45,4 +45,6 @@ public class UsuarioModel {
         this.celular = celular;
         this.senha = senha;
     }
+
+
 }
