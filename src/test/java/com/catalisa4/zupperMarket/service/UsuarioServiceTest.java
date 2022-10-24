@@ -14,6 +14,7 @@ import org.yaml.snakeyaml.events.Event;
 
 import java.util.Optional;
 
+import static com.catalisa4.zupperMarket.service.AnuncioServiceTest.ID;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -22,8 +23,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class UsuarioServiceTest {
 
-    //public static final long id = 1L;
-    public static final long ID = 1L;
+
     public static final String NOME_COMPLETO = "Usuario Zupper";
     public static final String APELIDO = "zuppinhx";
     public static final String EMAIL = "usuario@zup.com.br";
@@ -82,35 +82,35 @@ public class UsuarioServiceTest {
     }
 
     //teste para verificar a execucaçao do metodo mesmo quando o id não é encontrado
-//    @Test
-//    void quandoNaoEncontrarOIdRetornarAExcecaoDoObjetoNaoEncontrado(){
-//        when(iUsuarioRepository.findById(anyLong())).thenThrow(new EntityNotFoundException(ERRO_ID_NAO_ENCONTRADO));
-//
-//        try {
-//            usuarioService.exibirUsuarioPorId(1L);
-//        }catch (Exception ex){
-//            assertEquals(EntityNotFoundException.class, ex.getClass());
-//            //teste para garantir que a msg de erro é igual a msg de erro esperada
-//            assertEquals(ERRO_ID_NAO_ENCONTRADO, ex.getMessage());
-//        }
-//    }
+    @Test
+    void quandoNaoEncontrarOIdRetornarAExcecaoDoObjetoNaoEncontrado(){
+        when(iUsuarioRepository.findById(anyLong())).thenThrow(new EntityNotFoundException(ERRO_ID_NAO_ENCONTRADO));
+
+        try {
+            usuarioService.exibirUsuarioPorId(1L);
+        }catch (Exception ex){
+            assertEquals(EntityNotFoundException.class, ex.getClass());
+            //teste para garantir que a msg de erro é igual a msg de erro esperada
+            assertEquals(ERRO_ID_NAO_ENCONTRADO, ex.getMessage());
+        }
+    }
 
     //Teste para verificar busca por email
-//    @Test
-//    void quandoFizerABuscaPorEmail(){
-//        when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
-//
-//        //criando o objeto para chamar o metodo
-//        Optional<UsuarioModel> response = usuarioService.buscarUsuarioPorEmail(EMAIL);
-//
-//        //teste para confirmar que o objeto criado não é nulo
-//        assertNotNull(response);
-//
-//        //teste para confirmar a classe chamada
-//        assertEquals(UsuarioModel.class, response.getClass());
-//        //teste para confirmar o retorno do metodo
-//        assertEquals(EMAIL, response.get());
-//    }
+    @Test
+    void quandoFizerABuscaPorEmail(){
+        when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
+
+        //criando o objeto para chamar o metodo
+        Optional<UsuarioModel> response = usuarioService.buscarUsuarioPorEmail(EMAIL);
+
+        //teste para confirmar que o objeto criado não é nulo
+        assertNotNull(response);
+
+        //teste para confirmar a classe chamada
+        assertEquals(UsuarioModel.class, response.getClass());
+        //teste para confirmar o retorno do metodo
+        assertEquals(EMAIL, response.get());
+    }
 
     //teste do metodo de cadastro do usuario
     @Test
@@ -148,25 +148,25 @@ public class UsuarioServiceTest {
     }
 
     //teste do metodo para atualizar cadastro
-//    @Test
-//    void quandoAtualizarCadastro_RetornarSucesso(){
-//        when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
-//
-//        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel, ID);
-//
-//        //teste para confirmar que o objeto criado não é nulo
-//        assertNotNull(response);
-//
-//        //teste para confirmar a classe chamada
-//        assertEquals(UsuarioModel.class, response.getClass());
-//
-//        //teste para confirmar o retorno do metodo
-//        assertEquals(NOME_COMPLETO, response.getNomeCompleto());
-//        assertEquals(APELIDO, response.getApelido());
-//        assertEquals(EMAIL, response.getEmail());
-//        assertEquals(CELULAR, response.getCelular());
-//        assertEquals(SENHA, response.getSenha());
-//    }
+    @Test
+    void quandoAtualizarCadastro_RetornarSucesso(){
+        when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
+
+        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel, ID);
+
+        //teste para confirmar que o objeto criado não é nulo
+        assertNotNull(response);
+
+        //teste para confirmar a classe chamada
+        assertEquals(UsuarioModel.class, response.getClass());
+
+        //teste para confirmar o retorno do metodo
+        assertEquals(NOME_COMPLETO, response.getNomeCompleto());
+        assertEquals(APELIDO, response.getApelido());
+        assertEquals(EMAIL, response.getEmail());
+        assertEquals(CELULAR, response.getCelular());
+        assertEquals(SENHA, response.getSenha());
+    }
 
 
 
