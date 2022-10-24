@@ -3,6 +3,7 @@ package com.catalisa4.zupperMarket.service;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IAnuncioRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -10,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.catalisa4.zupperMarket.enums.Categorias.TECNOLOGIA;
@@ -62,7 +65,7 @@ public class AnuncioServiceTest {
         anuncioService.cadastrarNovoAnuncio(anuncioModel);
         Mockito.verify(iAnuncioRepository, Mockito.times(1)).save(Mockito.any());
     }
-   /* @Test
+   @Test
     void BuscarTodosAnuncios() {
         List<AnuncioModel> listTroca = new ArrayList<>();
         Mockito.when(iAnuncioRepository.findAll()).thenReturn(listTroca);
@@ -70,7 +73,7 @@ public class AnuncioServiceTest {
         listTest = anuncioService.buscarTodosAnuncios();
         Assertions.assertEquals(listTest, listTroca);
 
-    }*/
+    }
 
  /*   @Test
     void buscaIdAnuncio() {
