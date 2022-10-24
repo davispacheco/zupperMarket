@@ -1,5 +1,6 @@
 package com.catalisa4.zupperMarket.service;
 
+import com.catalisa4.zupperMarket.exception.DataIntegratyViolationException;
 import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IUsuarioRepository;
@@ -129,6 +130,19 @@ public class UsuarioServiceTest {
         assertEquals(CELULAR, responseCadastro.getCelular());
         assertEquals(SENHA, responseCadastro.getSenha());
     }
+
+    @Test
+    void quandoRealizarCadastro_RetornarExcecaoDeViolacaoDeIntegridade(){
+        when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
+
+        try{
+            usuarioService.cadastrar(usuarioModel);
+        }catch (Exception ex){
+            assertEquals(DataIntegratyViolationException.class, ex.getClass());
+        }
+    }
+
+
 
 
 
