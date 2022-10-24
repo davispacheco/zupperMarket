@@ -46,11 +46,11 @@ public class AnuncioRequest {
     private FormasDeEntrega entrega;
 
     @NotNull(message = "Usuário deve ser preenchido.")
-    private UsuarioModel usuario;
+    private Long usuarioId;
 
     public AnuncioModel toAnuncioModel() {
         return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categorias,
-                quantidade, estado, cidade, entrega, usuario);
+                quantidade, estado, cidade, entrega, usuarioId);
     }
 
 }
