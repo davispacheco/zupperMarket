@@ -84,13 +84,13 @@ public class AnuncioServiceTest {
         Assertions.assertEquals(status.getId(),anuncioModel.getId());
     }
 
-  /*  @Test
+  @Test
     void alterarAnuncio() {
         Mockito.when(iAnuncioRepository.save(anuncioModel)).thenReturn(anuncioModel);
-        anuncioService.alterarAnuncio(anuncioModel);
+        anuncioService.alterarAnuncio(anuncioModel, anuncioModel.getId());
         Mockito.verify(iAnuncioRepository, Mockito.times(1)).save(anuncioModel);
 
-    }*/
+    }
 
    @Test
     void deletarAnuncio() {

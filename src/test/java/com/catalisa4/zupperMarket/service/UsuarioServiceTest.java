@@ -51,7 +51,7 @@ public class UsuarioServiceTest {
     private void setUsuarioService() {
         MockitoAnnotations.openMocks(this);
         //chamando metodo criado para inicio dos testes
-        startUsuario();
+     //   startUsuario();
     }
 
   /*  @Test
@@ -158,11 +158,11 @@ public class UsuarioServiceTest {
     void quandoAtualizarCadastro_RetornarSucesso(){
         when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
 
-<<<<<<< HEAD
+
         UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel,ID);
-=======
-        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel, id);
->>>>>>> 6b38226206c3f556dfb3c6fd2032eabf522ee6dd
+
+
+
 
         //teste para confirmar que o objeto criado não é nulo
         assertNotNull(response);
@@ -188,10 +188,10 @@ public class UsuarioServiceTest {
 
 
     //Criando metodo para 'iniciar' os testes
-    private void startUsuario(){
-        usuarioModel = new UsuarioModel(id, nomeCompleto, email, celular, senha, anuncios);
-        optionalUsuarioModel = Optional.of(new UsuarioModel(id, nomeCompleto, apelido, email, celular, senha, anuncios));
-    }
+   // private void startUsuario(){
+     //   usuarioModel = new UsuarioModel(id, nomeCompleto, email, celular, senha, anuncios);
+       // optionalUsuarioModel = Optional.of(new UsuarioModel(id, nomeCompleto, apelido, email, celular, senha, anuncios));
+    //}
 
 
 
