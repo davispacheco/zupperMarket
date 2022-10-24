@@ -66,7 +66,7 @@ public class AnuncioModel {
 
     public AnuncioModel(String nomeDoTitulo, String descricao, String urlFoto, String descricaoFoto, double valor,
                         boolean seNegociavel, Categorias categorias, int quantidade, String estado, String cidade,
-                        FormasDeEntrega entrega, UsuarioModel usuario) {
+                        FormasDeEntrega entrega) {
         this.nomeDoTitulo = nomeDoTitulo;
         this.descricao = descricao;
         this.urlFoto = urlFoto;
@@ -78,6 +78,5 @@ public class AnuncioModel {
         this.estado = estado;
         this.cidade = cidade;
         this.entrega = entrega;
-        this.usuario = usuario;
     }
 }

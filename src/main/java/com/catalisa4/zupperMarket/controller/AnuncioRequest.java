@@ -50,7 +50,7 @@ public class AnuncioRequest {
 
     public AnuncioModel toAnuncioModel() {
         return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categorias,
-                quantidade, estado, cidade, entrega, usuarioId);
+                quantidade, estado, cidade, entrega);
     }
 
 }
