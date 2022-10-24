@@ -98,7 +98,7 @@ public class UsuarioServiceTest {
         when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
 
         //criando o objeto para chamar o metodo
-        UsuarioModel responseEmail = usuarioService.buscarUsuarioPorEmail(EMAIL);
+        Optional<UsuarioModel> responseEmail = usuarioService.buscarUsuarioPorEmail(EMAIL);
 
         //teste para confirmar que o objeto criado não é nulo
         assertNotNull(responseEmail);
@@ -106,11 +106,29 @@ public class UsuarioServiceTest {
         //teste para confirmar a classe chamada
         assertEquals(UsuarioModel.class, responseEmail.getClass());
         //teste para confirmar o retorno do metodo
-        assertEquals(EMAIL, responseEmail.getEmail());
+        assertEquals(EMAIL, responseEmail.get());
     }
 
     //teste do metodo de cadastro do usuario
     @Test
+    void quandoRealizarCadastro_RetornarSucesso(){
+        when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
+
+        UsuarioModel responseCadastro = usuarioService.cadastrar(usuarioModel);
+
+        //teste para confirmar que o objeto criado não é nulo
+        assertNotNull(responseCadastro);
+
+        //teste para confirmar a classe chamada
+        assertEquals(UsuarioModel.class, responseCadastro.getClass());
+
+        //teste para confirmar o retorno do metodo
+        assertEquals(NOME_COMPLETO, responseCadastro.getNomeCompleto());
+        assertEquals(APELIDO, responseCadastro.getApelido());
+        assertEquals(EMAIL, responseCadastro.getEmail());
+        assertEquals(CELULAR, responseCadastro.getCelular());
+        assertEquals(SENHA, responseCadastro.getSenha());
+    }
 
 
 
