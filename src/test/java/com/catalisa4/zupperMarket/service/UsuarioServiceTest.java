@@ -136,11 +136,15 @@ public class UsuarioServiceTest {
         when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
 
         try{
+            optionalUsuarioModel.get().setId(Long.valueOf(2));
             usuarioService.cadastrar(usuarioModel);
         }catch (Exception ex){
             assertEquals(DataIntegratyViolationException.class, ex.getClass());
+            assertEquals("E-mail já existe!", ex.getMessage());
         }
     }
+
+
 
 
 
