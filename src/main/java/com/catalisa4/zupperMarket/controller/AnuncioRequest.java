@@ -45,7 +45,7 @@ public class AnuncioRequest {
     @NotBlank(message = "Informe qual a forma de entrega do produto ou serviço.")
     private FormasDeEntrega entrega;
 
-    @NotNull(message = "Usuário deve ser preenchido.")
+    @NotBlank(message = "Usuário deve ser preenchido.")
     private Long usuarioId;
 
     public AnuncioModel toAnuncioModel() {
