@@ -1,6 +1,7 @@
 package com.catalisa4.zupperMarket.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Getter
-@Setter
 @NoArgsConstructor
+@Setter
 @Entity
 @Table(name = "usuarios")
 public class UsuarioModel {
