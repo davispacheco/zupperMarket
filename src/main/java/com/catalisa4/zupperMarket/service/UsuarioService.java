@@ -18,8 +18,7 @@ public class UsuarioService {
     private IUsuarioRepository iUsuarioRepository;
 
     public UsuarioModel cadastrar(UsuarioModel usuarioModel) {
-        UsuarioModel obj = buscarUsuarioPorEmail(usuarioModel.getEmail());
-        validarEmailExistente(obj, usuarioModel.getEmail());
+        validarEmailExistente(usuarioModel.getEmail());
         return iUsuarioRepository.save(usuarioModel);
     }
 
@@ -41,21 +40,22 @@ public class UsuarioService {
         iUsuarioRepository.deleteById(id);
     }
 
-    public void validarEmailInexistente(UsuarioModel usuarioModel, String email) {
-        if (!email.equalsIgnoreCase(usuarioModel.getEmail())) {
+    public void validarEmailInexistente(String email) {
+        Optional<UsuarioModel> obj = buscarUsuarioPorEmail(email);
+        if (obj.isEmpty()) {
             throw new EntityNotFoundException("E-mail não encontrado: " + email);
         }
     }
 
-    public void validarEmailExistente(UsuarioModel usuarioModel, String email) {
-        if (email.equalsIgnoreCase(usuarioModel.getEmail())) {
+    public void validarEmailExistente(String email) {
+        Optional<UsuarioModel> obj = buscarUsuarioPorEmail(email);
+        if (obj.isPresent()) {
             throw new DataIntegratyViolationException("E-mail já existe!");
         }
     }
 
     //Validação(Query method)
-    public UsuarioModel buscarUsuarioPorEmail(String email) {
-        Optional<UsuarioModel> obj = iUsuarioRepository.findByEmail(email);
-        return obj.get();
+    public Optional<UsuarioModel> buscarUsuarioPorEmail(String email) {
+        return iUsuarioRepository.findByEmail(email);
     }
 }
