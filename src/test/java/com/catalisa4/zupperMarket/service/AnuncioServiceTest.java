@@ -75,14 +75,14 @@ public class AnuncioServiceTest {
 
     }
 
- /*   @Test
+ @Test
     void buscaIdAnuncio() {
         AnuncioModel anuncioModel = new AnuncioModel();
         anuncioModel.setId(1L);
         Mockito.when(iAnuncioRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(anuncioModel));
-        var status = anuncioService.buscarPorId();
+        var status = anuncioService.buscarPorId(ID);
         Assertions.assertEquals(status.getId(),anuncioModel.getId());
-    }*/
+    }
 
   /*  @Test
     void alterarAnuncio() {
@@ -92,10 +92,10 @@ public class AnuncioServiceTest {
 
     }*/
 
-   /* @Test
+   @Test
     void deletarAnuncio() {
         anuncioService.deletarAnuncio(anuncioModel.getId());
         Mockito.verify(iAnuncioRepository,Mockito.times(1)).deleteById(anuncioModel.getId());
-    }*/
+    }
 
 }
