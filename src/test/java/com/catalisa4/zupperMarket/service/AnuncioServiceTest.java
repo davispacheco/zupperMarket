@@ -24,7 +24,7 @@ public class AnuncioServiceTest {
     public static final String urlFoto = "https://www.apple.com/br/shop/buy-iphone/iphone-14-pro";
     public static final String descricaoFoto = "è uma aparalho celular";
     public static final Double valor = 1000.00;
-    public static final int ID = 1;
+    public static final Long ID = 1L;
     public static final Enum Categoria = TECNOLOGIA;
     public static final int quantidade = 1;
     public static final String estado = "São Paulo";

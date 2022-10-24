@@ -152,7 +152,7 @@ public class UsuarioServiceTest {
     void quandoAtualizarCadastro_RetornarSucesso(){
         when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
 
-        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel, ID);
+        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel,ID);
 
         //teste para confirmar que o objeto criado não é nulo
         assertNotNull(response);
