@@ -2,6 +2,7 @@ package com.catalisa4.zupperMarket.service;
 
 import com.catalisa4.zupperMarket.exception.DataIntegratyViolationException;
 import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
+import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IUsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.yaml.snakeyaml.events.Event;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.catalisa4.zupperMarket.service.AnuncioServiceTest.ID;
@@ -24,12 +27,14 @@ import static org.mockito.Mockito.when;
 public class UsuarioServiceTest {
 
 
-    public static final String NOME_COMPLETO = "Usuario Zupper";
-    public static final String APELIDO = "zuppinhx";
-    public static final String EMAIL = "usuario@zup.com.br";
-    public static final String CELULAR = "3499999999";
-    public static final String SENHA = "1234";
-    public static final String ERRO_ID_NAO_ENCONTRADO = "Erro: id não encontrado. ";
+    public static final Long id = 1L;
+    public static final String nomeCompleto = "Usuario Zupper";
+    public static final String apelido = "zuppinhx";
+    public static final String email = "usuario@zup.com.br";
+    public static final String celular = "3499999999";
+    public static final String senha = "1234";
+    public static final List<AnuncioModel> anuncios = new ArrayList<>();
+    public static final String erroIdNaoEncontrado = "Erro: id não encontrado. ";
 
 
     @InjectMocks
@@ -84,14 +89,14 @@ public class UsuarioServiceTest {
     //teste para verificar a execucaçao do metodo mesmo quando o id não é encontrado
     @Test
     void quandoNaoEncontrarOIdRetornarAExcecaoDoObjetoNaoEncontrado(){
-        when(iUsuarioRepository.findById(anyLong())).thenThrow(new EntityNotFoundException(ERRO_ID_NAO_ENCONTRADO));
+        when(iUsuarioRepository.findById(anyLong())).thenThrow(new EntityNotFoundException(erroIdNaoEncontrado));
 
         try {
             usuarioService.exibirUsuarioPorId(1L);
         }catch (Exception ex){
             assertEquals(EntityNotFoundException.class, ex.getClass());
             //teste para garantir que a msg de erro é igual a msg de erro esperada
-            assertEquals(ERRO_ID_NAO_ENCONTRADO, ex.getMessage());
+            assertEquals(erroIdNaoEncontrado, ex.getMessage());
         }
     }
 
@@ -101,7 +106,7 @@ public class UsuarioServiceTest {
         when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
 
         //criando o objeto para chamar o metodo
-        Optional<UsuarioModel> response = usuarioService.buscarUsuarioPorEmail(EMAIL);
+        Optional<UsuarioModel> response = usuarioService.buscarUsuarioPorEmail(email);
 
         //teste para confirmar que o objeto criado não é nulo
         assertNotNull(response);
@@ -109,7 +114,7 @@ public class UsuarioServiceTest {
         //teste para confirmar a classe chamada
         assertEquals(UsuarioModel.class, response.getClass());
         //teste para confirmar o retorno do metodo
-        assertEquals(EMAIL, response.get());
+        assertEquals(email, response.get());
     }
 
     //teste do metodo de cadastro do usuario
@@ -126,11 +131,12 @@ public class UsuarioServiceTest {
         assertEquals(UsuarioModel.class, response.getClass());
 
         //teste para confirmar o retorno do metodo
-        assertEquals(NOME_COMPLETO, response.getNomeCompleto());
-        assertEquals(APELIDO, response.getApelido());
-        assertEquals(EMAIL, response.getEmail());
-        assertEquals(CELULAR, response.getCelular());
-        assertEquals(SENHA, response.getSenha());
+        assertEquals(id, response.getId());
+        assertEquals(nomeCompleto, response.getNomeCompleto());
+        assertEquals(apelido, response.getApelido());
+        assertEquals(email, response.getEmail());
+        assertEquals(celular, response.getCelular());
+        assertEquals(senha, response.getSenha());
     }
 
     //teste do metodo de cadastro do usuario com excessao
@@ -152,7 +158,11 @@ public class UsuarioServiceTest {
     void quandoAtualizarCadastro_RetornarSucesso(){
         when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
 
+<<<<<<< HEAD
         UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel,ID);
+=======
+        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel, id);
+>>>>>>> 6b38226206c3f556dfb3c6fd2032eabf522ee6dd
 
         //teste para confirmar que o objeto criado não é nulo
         assertNotNull(response);
@@ -161,11 +171,12 @@ public class UsuarioServiceTest {
         assertEquals(UsuarioModel.class, response.getClass());
 
         //teste para confirmar o retorno do metodo
-        assertEquals(NOME_COMPLETO, response.getNomeCompleto());
-        assertEquals(APELIDO, response.getApelido());
-        assertEquals(EMAIL, response.getEmail());
-        assertEquals(CELULAR, response.getCelular());
-        assertEquals(SENHA, response.getSenha());
+        assertEquals(id, response.getId());
+        assertEquals(nomeCompleto, response.getNomeCompleto());
+        assertEquals(apelido, response.getApelido());
+        assertEquals(email, response.getEmail());
+        assertEquals(celular, response.getCelular());
+        assertEquals(senha, response.getSenha());
     }
 
 
@@ -178,8 +189,8 @@ public class UsuarioServiceTest {
 
     //Criando metodo para 'iniciar' os testes
     private void startUsuario(){
-        usuarioModel = new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
-        optionalUsuarioModel = Optional.of(new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA));
+        usuarioModel = new UsuarioModel(id, nomeCompleto, email, celular, senha, anuncios);
+        optionalUsuarioModel = Optional.of(new UsuarioModel(id, nomeCompleto, apelido, email, celular, senha, anuncios));
     }
 
 
