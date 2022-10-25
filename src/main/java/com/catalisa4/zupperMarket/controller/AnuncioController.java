@@ -40,7 +40,7 @@ public class AnuncioController {
 
     @PutMapping (path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest, @PathVariable Long id) {
-        AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel(), id);
+        AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }

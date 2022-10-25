@@ -42,7 +42,7 @@ public class AnuncioService {
         return iAnuncioRepository.save(newAnuncio);
     }*/
 
-    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel, Long id) {
+    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel) {
 
         return iAnuncioRepository.save(anuncioModel);
     }
