@@ -51,7 +51,7 @@ public class UsuarioServiceTest {
     private void setUsuarioService() {
         MockitoAnnotations.openMocks(this);
         //chamando metodo criado para inicio dos testes
-        startUsuario();
+       /* startUsuario();*/
     }
 
   /*  @Test
@@ -183,12 +183,12 @@ public class UsuarioServiceTest {
 
 
 
-    //Criando metodo para 'iniciar' os testes
+  /*  //Criando metodo para 'iniciar' os testes
     private void startUsuario(){
         usuarioModel = new UsuarioModel(id, nomeCompleto, email, celular, senha, anuncios);
         optionalUsuarioModel = Optional.of(new UsuarioModel(id, nomeCompleto, apelido, email, celular, senha, anuncios));
     }
-
+*/
 
 
 }
