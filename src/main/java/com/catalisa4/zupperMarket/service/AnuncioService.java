@@ -25,9 +25,6 @@ public class AnuncioService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
-    @Autowired
-    private IUsuarioRepository iUsuarioRepository;
-
     public List<AnuncioModel> buscarTodosAnuncios() {
         return iAnuncioRepository.findAll();
     }
@@ -45,6 +42,7 @@ public class AnuncioService {
     public List<AnuncioModel> buscarPorStatusECategoria(Status status, Categoria categoria) {
         return iAnuncioRepository.findByStatusAndCategoria(status, categoria);
     }
+
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long id) {
         anuncioModel.setStatus(Status.DISPONIVEL);
         anuncioModel.setDataHoraCriacao(LocalDateTime.now());
