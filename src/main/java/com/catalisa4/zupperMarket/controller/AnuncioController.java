@@ -27,7 +27,7 @@ public class AnuncioController {
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(listaDeAnunciosModel));
     }
 
-    @GetMapping(path = "/status")
+    @GetMapping
     public ResponseEntity<List<AnuncioResponse>> buscarAnuncioPorStatus(@RequestParam Status status) {
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
