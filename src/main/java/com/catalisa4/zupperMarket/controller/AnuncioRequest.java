@@ -6,6 +6,7 @@ import com.catalisa4.zupperMarket.model.AnuncioModel;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @Getter
@@ -22,16 +23,16 @@ public class AnuncioRequest {
 
     private String descricaoFoto;
 
-    @NotBlank(message = "Anúncio deve conter valor. Caso não tenha valor definido, coloque 0 (zero).")
+    @NotNull(message = "Anúncio deve conter valor. Caso não tenha valor definido, coloque 0 (zero).")
     private double valor;
 
-    @NotBlank(message = "Defina se o valor é negociável ou não.")
+    @NotNull(message = "Defina se o valor é negociável ou não.")
     private boolean seNegociavel;
 
-    @NotBlank(message = "Informe a categoria do anúncio.")
+    @NotNull(message = "Informe a categoria do anúncio.")
     private Categoria categoria;
 
-    @NotBlank(message = "Insira a quantidade disponível.")
+    @NotNull(message = "Insira a quantidade disponível.")
     private int quantidade;
 
     @NotBlank(message = "Insira o estado onde o objeto ou serviço está localizado.")
@@ -40,10 +41,10 @@ public class AnuncioRequest {
     @NotBlank(message = "Insira a cidade onde o objeto ou serviço está localizado.")
     private String cidade;
 
-    @NotBlank(message = "Informe qual a forma de entrega do produto ou serviço.")
+    @NotNull(message = "Informe qual a forma de entrega do produto ou serviço.")
     private FormaDeEntrega entrega;
 
-    @NotBlank(message = "Usuário deve ser preenchido.")
+    @NotNull(message = "Usuário deve ser preenchido.")
     private Long usuarioId;
 
     public AnuncioModel toAnuncioModel() {
