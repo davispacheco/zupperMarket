@@ -27,13 +27,13 @@ public class AnuncioController {
     }
 
     @GetMapping (path = "/{id}")
-    public AnuncioModel buscarAnuncioPorId(@PathVariable Long id){
-        return anuncioService.buscarPorId(id);
+    public ResponseEntity<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id){
+        return ResponseEntity.ok(anuncioService.buscarPorId(id));
     }
 
     @PostMapping
     public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@Valid @RequestBody AnuncioRequest anuncioRequest){
-        AnuncioModel anuncio = anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel());
+        AnuncioModel anuncio = anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel(), anuncioRequest.getUsuarioId());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
         return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
     }
