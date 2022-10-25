@@ -28,24 +28,11 @@ public class UsuarioService {
         return obj.get();
     }
 
-    public UsuarioModel atualizarUsuarioCadastrado(UsuarioModel usuarioModel, Long id) {
-        UsuarioModel newUsuario = exibirUsuarioPorId(id);
-        newUsuario.setNomeCompleto(usuarioModel.getNomeCompleto());
-        newUsuario.setApelido(usuarioModel.getApelido());
-        newUsuario.setCelular(usuarioModel.getCelular());
-        return iUsuarioRepository.save(newUsuario);
-    }
 
     public void deletarUsuario(Long id) {
         iUsuarioRepository.deleteById(id);
     }
 
-    public void validarEmailInexistente(String email) {
-        Optional<UsuarioModel> obj = buscarUsuarioPorEmail(email);
-        if (obj.isEmpty()) {
-            throw new EntityNotFoundException("E-mail não encontrado: " + email);
-        }
-    }
 
     public void validarEmailExistente(String email) {
         Optional<UsuarioModel> obj = buscarUsuarioPorEmail(email);

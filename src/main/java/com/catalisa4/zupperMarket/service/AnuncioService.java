@@ -21,6 +21,8 @@ public class AnuncioService {
     @Autowired
     private IAnuncioRepository iAnuncioRepository;
 
+    @Autowired
+    private IUsuarioRepository iUsuarioRepository;
 
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
@@ -31,6 +33,7 @@ public class AnuncioService {
 
     public AnuncioModel buscarPorId(Long id) {
         Optional<AnuncioModel> obj = iAnuncioRepository.findById(id);
+        obj.orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado. " + id)));
         return obj.get();
     }
 
@@ -38,28 +41,22 @@ public class AnuncioService {
         anuncioModel.setStatus(Status.DISPONIVEL);
         anuncioModel.setDataHoraCriacao(LocalDateTime.now());
         Optional<UsuarioModel> usuario = iUsuarioRepository.findById(id);
-        usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com id " + id + " não encontrado.")));
+
+        usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o id " + id + " não encontrado.")));
+
+        
         anuncioModel.setUsuario(usuario.get());
         return iAnuncioRepository.save(anuncioModel);
     }
 
-   /* public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel, Long id) {
-        AnuncioModel newAnuncio = buscarPorId(id);
-        newAnuncio.setNomeDoTitulo(anuncioModel.getNomeDoTitulo());
-        newAnuncio.setDescricao(anuncioModel.getDescricao());
-        newAnuncio.setStatus(anuncioModel.getStatus());
-        return iAnuncioRepository.save(newAnuncio);
-    }*/
-
     public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel) {
-
         return iAnuncioRepository.save(anuncioModel);
     }
+
 
     public void deletarAnuncio(Long id) {
         iAnuncioRepository.deleteById(id);
     }
-
 
 
 }

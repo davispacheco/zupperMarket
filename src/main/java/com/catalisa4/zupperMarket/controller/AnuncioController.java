@@ -27,8 +27,8 @@ public class AnuncioController {
     }
 
     @GetMapping (path = "/{id}")
-    public AnuncioModel buscarAnuncioPorId(@PathVariable Long id){
-        return anuncioService.buscarPorId(id);
+    public ResponseEntity<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id){
+        return ResponseEntity.ok(anuncioService.buscarPorId(id));
     }
 
     @PostMapping
