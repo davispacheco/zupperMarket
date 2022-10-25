@@ -48,7 +48,7 @@ public class UsuarioServiceTest {
     @BeforeEach
     private void setUsuarioService() {
         MockitoAnnotations.openMocks(this);
-        //chamando metodo criado para inicio dos testes
+    //chamando metodo criado para inicio dos testes
         startUsuario();
     }
 
@@ -136,7 +136,7 @@ public class UsuarioServiceTest {
     void deletarComSucesso(){
         when(iUsuarioRepository.findById(anyLong())).thenReturn(optionalUsuarioModel);
         doNothing().when(iUsuarioRepository).deleteById(anyLong());
-
+   
         usuarioService.deletarUsuario(ID);
         verify(iUsuarioRepository, times(1)).deleteById(anyLong());
     }

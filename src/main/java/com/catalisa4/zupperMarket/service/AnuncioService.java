@@ -24,6 +24,9 @@ public class AnuncioService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
+    @Autowired
+    private IUsuarioRepository iUsuarioRepository;
+
     public List<AnuncioModel> buscarTodosAnuncios() {
         return iAnuncioRepository.findAll();
     }
@@ -38,7 +41,10 @@ public class AnuncioService {
         anuncioModel.setStatus(Status.DISPONIVEL);
         anuncioModel.setDataHoraCriacao(LocalDateTime.now());
         Optional<UsuarioModel> usuario = iUsuarioRepository.findById(id);
+
         usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o id " + id + " não encontrado.")));
+
+        
         anuncioModel.setUsuario(usuario.get());
         return iAnuncioRepository.save(anuncioModel);
     }
