@@ -30,7 +30,7 @@ public class AnuncioController {
     @GetMapping(path = "/status")
     public ResponseEntity<List<AnuncioResponse>> buscarAnuncioPorStatus(@RequestParam Status status) {
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
-        return AnuncioResponse.fromAnuncioModelList(anuncios);
+        return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
 
     @GetMapping (path = "/{id}")
