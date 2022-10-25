@@ -2,6 +2,7 @@ package com.catalisa4.zupperMarket.service;
 
 
 import com.catalisa4.zupperMarket.enums.Status;
+import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.repository.IAnuncioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class AnuncioService {
 
     public AnuncioModel buscarPorId(Long id) {
         Optional<AnuncioModel> obj = iAnuncioRepository.findById(id);
+        obj.orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado. " + id)));
         return obj.get();
     }
 
