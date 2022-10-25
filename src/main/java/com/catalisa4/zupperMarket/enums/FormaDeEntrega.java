@@ -1,6 +1,6 @@
 package com.catalisa4.zupperMarket.enums;
 
-public enum FormasDeEntrega {
+public enum FormaDeEntrega {
 
     TRANSPORTADORA,
 

@@ -1,7 +1,7 @@
 package com.catalisa4.zupperMarket.model;
 
-import com.catalisa4.zupperMarket.enums.Categorias;
-import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
+import com.catalisa4.zupperMarket.enums.Categoria;
+import com.catalisa4.zupperMarket.enums.FormaDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import lombok.*;
 
@@ -41,7 +41,7 @@ public class AnuncioModel {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Categorias categorias;
+    private Categoria categoria;
 
     @Column(length = 3, nullable = false)
     private int quantidade;
@@ -54,7 +54,7 @@ public class AnuncioModel {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private FormasDeEntrega entrega;
+    private FormaDeEntrega entrega;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -66,15 +66,15 @@ public class AnuncioModel {
     private UsuarioModel usuario;
 
     public AnuncioModel(String nomeDoTitulo, String descricao, String urlFoto, String descricaoFoto, double valor,
-                        boolean seNegociavel, Categorias categorias, int quantidade, String estado, String cidade,
-                        FormasDeEntrega entrega) {
+                        boolean seNegociavel, Categoria categoria, int quantidade, String estado, String cidade,
+                        FormaDeEntrega entrega) {
         this.nomeDoTitulo = nomeDoTitulo;
         this.descricao = descricao;
         this.urlFoto = urlFoto;
         this.descricaoFoto = descricaoFoto;
         this.valor = valor;
         this.seNegociavel = seNegociavel;
-        this.categorias = categorias;
+        this.categoria = categoria;
         this.quantidade = quantidade;
         this.estado = estado;
         this.cidade = cidade;

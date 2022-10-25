@@ -1,7 +1,7 @@
 package com.catalisa4.zupperMarket.controller;
 
-import com.catalisa4.zupperMarket.enums.Categorias;
-import com.catalisa4.zupperMarket.enums.FormasDeEntrega;
+import com.catalisa4.zupperMarket.enums.Categoria;
+import com.catalisa4.zupperMarket.enums.FormaDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import lombok.*;
@@ -25,7 +25,7 @@ public class AnuncioResponse {
 
     private boolean seNegociavel;
 
-    private Categorias categorias;
+    private Categoria categoria;
 
     private int quantidade;
 
@@ -33,13 +33,13 @@ public class AnuncioResponse {
 
     private String cidade;
 
-    private FormasDeEntrega entrega;
+    private FormaDeEntrega entrega;
 
     private Status status;
 
     public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel) {
         return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
-                anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategorias(),
+                anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
                 anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
                 anuncioModel.getStatus());
 

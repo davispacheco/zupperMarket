@@ -12,8 +12,8 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static com.catalisa4.zupperMarket.enums.Categorias.TECNOLOGIA;
-import static com.catalisa4.zupperMarket.enums.FormasDeEntrega.TRANSPORTADORA;
+import static com.catalisa4.zupperMarket.enums.Categoria.TECNOLOGIA;
+import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
 import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 
 public class AnuncioServiceTest {
