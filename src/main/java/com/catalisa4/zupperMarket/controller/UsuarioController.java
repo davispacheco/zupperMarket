@@ -22,12 +22,6 @@ public class UsuarioController {
         return new ResponseEntity<>(UsuarioResponse.fromUsuarioModel(usuario), HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @PutMapping(path = "/{id}")
-    public ResponseEntity<UsuarioResponse> atualizarUsuario(@RequestBody UsuarioModel usuarioModel, @PathVariable Long id) {
-        UsuarioModel usuario = usuarioService.atualizarUsuarioCadastrado(usuarioModel, id);
-        return ResponseEntity.ok(UsuarioResponse.fromUsuarioModel(usuario));
-    }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @DeleteMapping(path = "/{id}")
