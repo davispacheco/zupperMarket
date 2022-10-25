@@ -86,7 +86,7 @@ public class AnuncioServiceTest {
         Mockito.when(iAnuncioRepository.save(anuncioModel)).thenReturn(anuncioModel);
         anuncioService.alterarAnuncio(anuncioModel);
         Mockito.verify(iAnuncioRepository, Mockito.times(1)).save(Mockito.any());
-
+        //
     }
 
     @Test
