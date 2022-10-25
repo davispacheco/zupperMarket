@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.catalisa4.zupperMarket.service.AnuncioServiceTest.ID;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -33,8 +32,6 @@ public class UsuarioServiceTest {
     public static final String EMAIL = "usuario@zup.com.br";
     public static final String CELULAR = "3499999999";
     public static final String SENHA = "1234";
-
-    public static final List<AnuncioModel> anuncios = new ArrayList<>();
     public static final String ERRO_ID_NAO_ENCONTRADO = "Erro: id não encontrado. ";
 
 
@@ -113,7 +110,6 @@ public class UsuarioServiceTest {
         assertEquals(UsuarioModel.class, response.getClass());
 
         //teste para confirmar o retorno do metodo
-        assertEquals(ID, response.getId());
         assertEquals(NOME_COMPLETO, response.getNomeCompleto());
         assertEquals(APELIDO, response.getApelido());
         assertEquals(EMAIL, response.getEmail());
@@ -135,28 +131,6 @@ public class UsuarioServiceTest {
         }
     }
 
-    //teste do metodo para atualizar cadastro
-    @Test
-    void quandoAtualizarCadastro_RetornarSucesso(){
-        when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
-
-        UsuarioModel response = usuarioService.atualizarUsuarioCadastrado(usuarioModel, ID);
-
-        //teste para confirmar que o objeto criado não é nulo
-        assertNotNull(response);
-
-        //teste para confirmar a classe chamada
-        assertEquals(UsuarioModel.class, response.getClass());
-
-        //teste para confirmar o retorno do metodo
-        assertEquals(ID, response.getId());
-        assertEquals(NOME_COMPLETO, response.getNomeCompleto());
-        assertEquals(APELIDO, response.getApelido());
-        assertEquals(EMAIL, response.getEmail());
-        assertEquals(CELULAR, response.getCelular());
-        assertEquals(SENHA, response.getSenha());
-    }
-
     //teste do metodo de deletar usuario cadastrado
     @Test
     void deletarComSucesso(){
@@ -172,7 +146,4 @@ public class UsuarioServiceTest {
         usuarioModel = new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
         optionalUsuarioModel = Optional.of(new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA));
     }
-
-
-
 }
