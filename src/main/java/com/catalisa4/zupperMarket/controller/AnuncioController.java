@@ -1,6 +1,7 @@
 package com.catalisa4.zupperMarket.controller;
 
 
+import ch.qos.logback.core.status.Status;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
