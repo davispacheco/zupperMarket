@@ -30,7 +30,7 @@ public class AnuncioModel {
     @Column(length = 60, nullable = false)
     private String urlFoto;
 
-    @Column(length = 300, nullable = false)
+    @Column(length = 300)
     private String descricaoFoto;
 
     @Column(length = 12, nullable = false)
