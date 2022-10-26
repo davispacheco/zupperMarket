@@ -52,7 +52,7 @@ class AnuncioControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
-*/
+
 
     }*/
 
