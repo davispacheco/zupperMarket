@@ -27,13 +27,13 @@ public class AnuncioController {
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(listaDeAnunciosModel));
     }
 
-    @GetMapping
+    @GetMapping(path = "/status")
     public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatus(@RequestParam Status status) {
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
 
-    @GetMapping
+    @GetMapping(path = "/categoria")
     public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatusECategorias(@RequestParam Status status, @RequestParam Categoria categoria){
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
