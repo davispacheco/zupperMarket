@@ -58,6 +58,13 @@ public class AnuncioController {
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<AnuncioResponse> alterarStatusDoAnuncio(@RequestBody AnuncioRequestStatusOnly anuncioRequestStatusOnly, @PathVariable Long id) {
+        AnuncioModel anuncioAlterado = anuncioService.alterarStatusAnuncio(anuncioRequestStatusOnly.toAnuncioModel());
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
+        return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> deletarAnuncio(@PathVariable Long id) {
         anuncioService.deletarAnuncio(id);
