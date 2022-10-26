@@ -1,6 +1,6 @@
 package com.catalisa4.zupperMarket.enums;
 
-public enum Categorias {
+public enum Categoria {
 
     SERVICOS,
 

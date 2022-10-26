@@ -1,6 +1,7 @@
 package com.catalisa4.zupperMarket.controller;
 
 
+import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 
 import com.catalisa4.zupperMarket.service.AnuncioService;
@@ -24,6 +25,12 @@ public class AnuncioController {
     public ResponseEntity<List<AnuncioResponse>> buscarAnuncios (){
         List<AnuncioModel> listaDeAnunciosModel = anuncioService.buscarTodosAnuncios();
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(listaDeAnunciosModel));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AnuncioResponse>> buscarAnuncioPorStatus(@RequestParam Status status) {
+        List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
+        return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
 
     @GetMapping (path = "/{id}")

@@ -1,6 +1,7 @@
 package com.catalisa4.zupperMarket.service;
 
 
+import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
@@ -24,9 +25,6 @@ public class AnuncioService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
-    @Autowired
-    private IUsuarioRepository iUsuarioRepository;
-
     public List<AnuncioModel> buscarTodosAnuncios() {
         return iAnuncioRepository.findAll();
     }
@@ -37,6 +35,14 @@ public class AnuncioService {
         return obj.get();
     }
 
+    public List<AnuncioModel> buscarPorStatus(Status status) {
+        return iAnuncioRepository.findByStatus(status);
+    }
+
+    public List<AnuncioModel> buscarPorStatusECategoria(Status status, Categoria categoria) {
+        return iAnuncioRepository.findByStatusAndCategoria(status, categoria);
+    }
+
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long id) {
         anuncioModel.setStatus(Status.DISPONIVEL);
         anuncioModel.setDataHoraCriacao(LocalDateTime.now());
@@ -44,7 +50,7 @@ public class AnuncioService {
 
         usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o id " + id + " não encontrado.")));
 
-        
+
         anuncioModel.setUsuario(usuario.get());
         return iAnuncioRepository.save(anuncioModel);
     }
