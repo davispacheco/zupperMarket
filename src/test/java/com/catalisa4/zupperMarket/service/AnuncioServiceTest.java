@@ -2,6 +2,7 @@ package com.catalisa4.zupperMarket.service;
 
 import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.enums.FormaDeEntrega;
+import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 
 import com.catalisa4.zupperMarket.model.UsuarioModel;
@@ -38,8 +39,8 @@ public class AnuncioServiceTest {
     public static final int quantidade = 1;
     public static final String estado = "São Paulo";
     public static final String cidade = "São Paulo";
-    public static final Enum entrega = TRANSPORTADORA;
-    public static final Enum status = DISPONIVEL;
+    public static final FormaDeEntrega entrega = TRANSPORTADORA;
+    public static final Status status = DISPONIVEL;
 
 
 
