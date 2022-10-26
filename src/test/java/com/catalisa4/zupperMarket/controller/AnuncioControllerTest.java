@@ -1,6 +1,6 @@
-<<<<<<< HEAD
 package com.catalisa4.zupperMarket.controller;
 
+import com.catalisa4.zupperMarket.controller.AnuncioController;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.service.AnuncioService;
@@ -130,4 +130,4 @@ class AnuncioControllerTest {
 //    }
 //
 //}
->>>>>>> fa39ad4a9bc80e6e93963d19f3b19380c763677d
+
