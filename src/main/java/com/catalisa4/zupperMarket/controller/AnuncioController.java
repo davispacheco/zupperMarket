@@ -1,6 +1,7 @@
 package com.catalisa4.zupperMarket.controller;
 
 
+import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,8 +28,14 @@ public class AnuncioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AnuncioResponse>> buscarAnuncioPorStatus(@RequestParam Status status) {
+    public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatus(@RequestParam Status status) {
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
+        return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatusECategorias(@RequestParam Status status, @RequestParam Categoria categoria){
+        List<AnuncioModel> anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
 
