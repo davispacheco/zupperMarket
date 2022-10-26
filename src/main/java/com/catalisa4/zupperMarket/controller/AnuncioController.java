@@ -29,7 +29,7 @@ public class AnuncioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AnuncioResponse>> buscarAnuncioPorStatus(@RequestParam Status status) {
+    public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatus(@RequestParam Status status) {
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
@@ -38,7 +38,6 @@ public class AnuncioController {
     public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatusECategorias(@RequestParam Status status, @RequestParam Categoria categoria){
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
-
     }
 
     @GetMapping (path = "/{id}")
