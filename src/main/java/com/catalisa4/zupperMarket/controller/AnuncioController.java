@@ -1,7 +1,6 @@
 package com.catalisa4.zupperMarket.controller;
 
 
-import ch.qos.logback.core.status.Status;
 import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
