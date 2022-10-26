@@ -1,18 +1,11 @@
-<<<<<<<HEAD
-        <<<<<<<HEAD
-        package com.catalisa4.zupperMarket.service;
-        =======
-        package com.catalisa4.zupperMarket.service;
-        >>>>>>>879112f797c5278679a5ec764ed31d67aa4ad507
+package com.catalisa4.zupperMarket.service;
+
 
 import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IAnuncioRepository;
-<<<<<<<HEAD
-        =======
 import org.junit.jupiter.api.Assertions;
->>>>>>>879112f797c5278679a5ec764ed31d67aa4ad507
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -20,23 +13,16 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-<<<<<<<HEAD
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static com.catalisa4.zupperMarket.enums.Categoria.TECNOLOGIA;
 import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
 import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 
-public class AnuncioServiceTest {
-    //Alterar para AnuncioServiceTest
-=======
-        import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
-import static com.catalisa4.zupperMarket.enums.Categorias.TECNOLOGIA;
-import static com.catalisa4.zupperMarket.enums.FormasDeEntrega.TRANSPORTADORA;
-import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 
     public class AnuncioServiceTest {
 
@@ -53,7 +39,7 @@ import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
         public static final String cidade = "São Paulo";
         public static final Enum entrega = TRANSPORTADORA;
         public static final Enum status = DISPONIVEL;
-<<<<<<<HEAD
+
 
 //package com.catalisa4.zupperMarket.service;
 //
@@ -100,9 +86,7 @@ import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 //    private AnuncioModel anuncioModel;
 //
 //    private Optional<AnuncioModel> optionalUsuarioModel;
-                >>>>>>>fa39ad4a9bc80e6e93963d19f3b19380c763677d
-=======
-        >>>>>>>879112f797c5278679a5ec764ed31d67aa4ad507
+
 
 
         @Mock
@@ -129,7 +113,7 @@ import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
         @Test
         void cadastrarAnuncio() {
             Mockito.when(iAnuncioRepository.save(Mockito.any())).thenReturn(anuncioModel);
-            anuncioService.cadastrarNovoAnuncio(anuncioModel);
+            anuncioService.cadastrarNovoAnuncio(anuncioModel, anuncioModel.getId());
             Mockito.verify(iAnuncioRepository, Mockito.times(1)).save(Mockito.any());
         }
 
@@ -152,7 +136,6 @@ import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
             Assertions.assertEquals(status.getId(), anuncioModel.getId());
         }
 
-
         @Test
         void alterarAnuncio() {
             Mockito.when(iAnuncioRepository.save(anuncioModel)).thenReturn(anuncioModel);
@@ -161,7 +144,6 @@ import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 
         }
 
-        @Test
 
         @Test
         void deletarAnuncio() {
