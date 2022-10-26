@@ -31,18 +31,19 @@ class AnuncioControllerTest {
 
     @MockBean
     AnuncioService anuncioService;
+
     private AnuncioModel anuncioModel;
 
     private AnuncioRequest anuncioRequest;
 
 
 
-/*
-    @Test
+
+/*    @Test
     public void salvarNovoAnuncio_emCasoDeSucessoAoSalvar_deveRetornar201() throws Exception {
         AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
-                1000, true, Categoria.TECNOLOGIA,
-                "PE", "PETROLINA", FormaDeEntrega.TRANSPORTADORA, 1);
+                1000, true, TECNOLOGIA, 1,
+                "PE", "PETROLINA", TRANSPORTADORA, 1);
 
         Mockito.when(anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel())).thenReturn(anuncioRequest.toAnuncioModel());
         this.mockMvc.perform(post("/anuncios")
@@ -53,7 +54,7 @@ class AnuncioControllerTest {
                 .andExpect(status().isCreated());
 */
 
-    }
+    }*/
 
     public static String asJsonString(final Object obj) {
         try {
