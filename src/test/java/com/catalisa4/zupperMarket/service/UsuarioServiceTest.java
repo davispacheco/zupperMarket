@@ -45,13 +45,13 @@ public class UsuarioServiceTest {
     @BeforeEach
     private void setUsuarioService() {
         MockitoAnnotations.openMocks(this);
-    //chamando metodo criado para inicio dos testes
+        //chamando metodo criado para inicio dos testes
         startUsuario();
     }
 
     //Testando metodo de buscar usuario por ID
     @Test
-    void quandoFizerABuscaPorId(){
+    void quandoFizerABuscaPorId() {
         when(iUsuarioRepository.findById(anyLong())).thenReturn(optionalUsuarioModel);
 
         //criando o objeto para chamar o metodo
@@ -66,12 +66,12 @@ public class UsuarioServiceTest {
 
     //teste para verificar a execucaçao do metodo mesmo quando o id não é encontrado
     @Test
-    void quandoNaoEncontrarOIdRetornarAExcecaoDoObjetoNaoEncontrado(){
+    void quandoNaoEncontrarOIdRetornarAExcecaoDoObjetoNaoEncontrado() {
         when(iUsuarioRepository.findById(anyLong())).thenThrow(new EntityNotFoundException(ERRO_ID_NAO_ENCONTRADO));
 
         try {
             usuarioService.exibirUsuarioPorId(1L);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             assertEquals(EntityNotFoundException.class, ex.getClass());
             //teste para garantir que a msg de erro é igual a msg de erro esperada
             assertEquals(ERRO_ID_NAO_ENCONTRADO, ex.getMessage());
@@ -80,7 +80,7 @@ public class UsuarioServiceTest {
 
     //Teste para verificar busca por email
     @Test
-    void quandoFizerABuscaPorEmail(){
+    void quandoFizerABuscaPorEmail() {
         when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
 
         //criando o objeto para chamar o metodo
@@ -95,7 +95,7 @@ public class UsuarioServiceTest {
 
     //teste do metodo de cadastro do usuario
     @Test
-    void quandoRealizarCadastro_RetornarSucesso(){
+    void quandoRealizarCadastro_RetornarSucesso() {
         when(iUsuarioRepository.save(any())).thenReturn(usuarioModel);
 
         UsuarioModel response = usuarioService.cadastrar(usuarioModel);
@@ -116,13 +116,13 @@ public class UsuarioServiceTest {
 
     //teste do metodo de cadastro do usuario com excessao
     @Test
-    void quandoRealizarCadastro_RetornarExcecaoDeViolacaoDeIntegridade(){
+    void quandoRealizarCadastro_RetornarExcecaoDeViolacaoDeIntegridade() {
         when(iUsuarioRepository.findByEmail(anyString())).thenReturn(optionalUsuarioModel);
 
-        try{
+        try {
             optionalUsuarioModel.get().setId(1L);
             usuarioService.cadastrar(usuarioModel);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             assertEquals(DataIntegratyViolationException.class, ex.getClass());
             assertEquals("E-mail já existe!", ex.getMessage());
         }
@@ -130,17 +130,17 @@ public class UsuarioServiceTest {
 
     //teste do metodo de deletar usuario cadastrado
     @Test
-    void deletarComSucesso(){
+    void deletarComSucesso() {
         when(iUsuarioRepository.findById(anyLong())).thenReturn(optionalUsuarioModel);
         doNothing().when(iUsuarioRepository).deleteById(anyLong());
-   
+
         usuarioService.deletarUsuario(ID);
         verify(iUsuarioRepository, times(1)).deleteById(anyLong());
     }
 
-   //Criando metodo para 'iniciar' os testes
-    private void startUsuario(){
-        usuarioModel = new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
-        optionalUsuarioModel = Optional.of(new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA));
+    //Criando metodo para 'iniciar' os testes
+    private void startUsuario() {
+        usuarioModel = new UsuarioModel(ID, NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
+        optionalUsuarioModel = Optional.of(new UsuarioModel(ID, NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA));
     }
 }
