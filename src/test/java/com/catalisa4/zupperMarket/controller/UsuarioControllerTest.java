@@ -15,8 +15,11 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class UsuarioControllerTest {
@@ -29,8 +32,6 @@ public class UsuarioControllerTest {
     private static final String SENHA = "1234";
 
     private UsuarioModel usuarioModel;
-    //private UsuarioResponse usuarioResponse;
-
     private UsuarioRequest usuarioRequest;
 
     @InjectMocks
@@ -52,7 +53,21 @@ public class UsuarioControllerTest {
 
         ResponseEntity<UsuarioResponse> response = usuarioController.cadastrarUsuario(usuarioRequest);
 
-        Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(ResponseEntity.class, response.getClass());
+    }
+
+    //teste para deletar usuario
+    @Test
+    void quandoDeletar_RetornarSucesso(){
+        doNothing().when(usuarioService).deletarUsuario(anyLong());
+
+        ResponseEntity<?> response = usuarioController.deletarUsuario(ID);
+
+        assertNotNull(response);
+        assertEquals(ResponseEntity.class, response.getClass());
+        verify(usuarioService, times(1)).deletarUsuario(anyLong());
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
 
@@ -62,7 +77,6 @@ public class UsuarioControllerTest {
     //Criando metodo para 'iniciar' os testes
     private void startUsuario(){
         usuarioModel = new UsuarioModel(NOME_COMPLETO, APELIDO, EMAIL, CELULAR, SENHA);
-        //usuarioResponse = new UsuarioResponse(ID, NOME_COMPLETO, APELIDO, EMAIL);
         usuarioRequest = new UsuarioRequest();
     }
 
