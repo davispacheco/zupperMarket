@@ -2,7 +2,7 @@ package com.catalisa4.zupperMarket.service;
 
 import com.catalisa4.zupperMarket.exception.DataIntegratyViolationException;
 import com.catalisa4.zupperMarket.exception.EntityNotFoundException;
-import com.catalisa4.zupperMarket.model.AnuncioModel;
+
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.repository.IUsuarioRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.yaml.snakeyaml.events.Event;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;

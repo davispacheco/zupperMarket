@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.catalisa4.zupperMarket.controller;
 
 import com.catalisa4.zupperMarket.model.AnuncioModel;
@@ -35,6 +35,7 @@ class AnuncioControllerTest {
 
 
 
+/*
     @Test
     public void salvarNovoAnuncio_emCasoDeSucessoAoSalvar_deveRetornar201() throws Exception {
         AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
@@ -49,6 +50,7 @@ class AnuncioControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated());
+*/
 
     }
 
@@ -130,4 +132,4 @@ class AnuncioControllerTest {
 //    }
 //
 //}
->>>>>>> fa39ad4a9bc80e6e93963d19f3b19380c763677d
+
