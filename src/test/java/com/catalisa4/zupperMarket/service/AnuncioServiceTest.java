@@ -22,7 +22,6 @@ import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
 import static com.catalisa4.zupperMarket.enums.Status.DISPONIVEL;
 
 
-
 public class AnuncioServiceTest {
 
 
@@ -40,17 +39,15 @@ public class AnuncioServiceTest {
     public static final Enum status = DISPONIVEL;
 
 
-
     @Mock
     IAnuncioRepository iAnuncioRepository;
+
     @InjectMocks
     AnuncioService anuncioService;
-
 
     private AnuncioModel anuncioModel;
 
     private Optional<AnuncioModel> optionalUsuarioModel;
-
 
     @BeforeEach
     private void setAnuncioService() {
@@ -59,10 +56,7 @@ public class AnuncioServiceTest {
                 1, "PE", "pETROLINA", TRANSPORTADORA, new UsuarioModel("Vitoria", "vi",
                 "vitoria@zup.com", "8788586589", "12345678"));
         MockitoAnnotations.openMocks(this);
-
     }
-
-
 
     @Test
     void cadastrarAnuncio() {
@@ -89,6 +83,7 @@ public class AnuncioServiceTest {
         var status = anuncioService.buscarPorId(ID);
         Assertions.assertEquals(status.getId(), anuncioModel.getId());
     }
+
     @Test
     void alterarAnuncio() {
         Mockito.when(iAnuncioRepository.save(anuncioModel)).thenReturn(anuncioModel);
