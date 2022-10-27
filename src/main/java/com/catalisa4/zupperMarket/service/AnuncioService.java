@@ -43,12 +43,12 @@ public class AnuncioService {
         return iAnuncioRepository.findByStatusAndCategoria(status, categoria);
     }
 
-    public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long id) {
+    public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long idUsuario) {
         anuncioModel.setStatus(Status.DISPONIVEL);
         anuncioModel.setDataHoraCriacao(LocalDateTime.now());
-        Optional<UsuarioModel> usuario = iUsuarioRepository.findById(id);
+        Optional<UsuarioModel> usuario = iUsuarioRepository.findById(idUsuario);
 
-        usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o id " + id + " não encontrado.")));
+        usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o idUsuario " + idUsuario + " não encontrado.")));
 
 
         anuncioModel.setUsuario(usuario.get());

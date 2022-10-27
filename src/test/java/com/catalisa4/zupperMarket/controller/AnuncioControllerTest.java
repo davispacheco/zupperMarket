@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //@WebMvcTest(AnuncioController.class)
-//@AutoConfigureMockMvc
+@AutoConfigureMockMvc
 @SpringBootTest
 class AnuncioControllerTest {
 
@@ -61,18 +61,20 @@ class AnuncioControllerTest {
     public static final FormaDeEntrega FORMA_DE_ENTREGA = TRANSPORTADORA;
 
 
-    @InjectMocks
-    private AnuncioController anuncioController;
+
 
     private AnuncioModel anuncioModel;
     private AnuncioRequest anuncioRequest;
 
 
-//    @Autowired
-//    private MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
-    @Mock
-    AnuncioService anuncioService;
+    @MockBean
+    private AnuncioService anuncioService;
+
+    @InjectMocks
+    private AnuncioController anuncioController;
 
     @BeforeEach
     void setUp(){
@@ -80,102 +82,18 @@ class AnuncioControllerTest {
         startAnuncio();
     }
 
-    //teste de buscar anuncio por Id
     @Test
-    void quandoBuscarPorId_RetornarSucesso(){
-        when(anuncioService.buscarPorId(anyLong())).thenReturn(anuncioModel);
-
-        ResponseEntity<AnuncioModel> response = anuncioController.buscarAnuncioPorId(ID);
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(AnuncioModel.class, response.getBody().getClass());
-    }
-
-    //teste para buscar lista de anuncios
-    @Test
-    void quandoBuscarPorAnuncios_RetornarListaDeAnuncios(){
-        when(anuncioService.buscarTodosAnuncios()).thenReturn(List.of(anuncioModel));
-
-        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnuncios();
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(ArrayList.class, response.getBody().getClass());
-        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
-    }
-
-    //teste para buscar lista de anuncios por status
-    @Test
-    void quandoBuscarPorAnunciosPorStatus_RetornarStatus(){
-        when(anuncioService.buscarPorStatus(anuncioModel.getStatus())).thenReturn(List.of(anuncioModel));
-
-        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnunciosPorStatus(anuncioModel.getStatus());
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(ArrayList.class, response.getBody().getClass());
-        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
-    }
-
-    //teste para criar anuncio
-    @Test
-    void quandoCriarAnuncio_RetornarCreated(){
-        when(anuncioService.cadastrarNovoAnuncio(any(), anyLong())).thenReturn(anuncioModel);
-        when(anuncioRequest.toAnuncioModel()).thenReturn(anuncioModel);
-
-        ResponseEntity<AnuncioResponse> response = anuncioController.cadastrarAnuncio(anuncioRequest);
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(HttpStatus.CREATED, response.getStatusCode());
-    }
-
-    //teste para buscar lista de anuncios por status epor categoria
-    @Test
-    void quandoBuscarPorAnunciosPorStatusECategoria_RetornarStatusECategoria(){
-        when(anuncioService.buscarPorStatusECategoria(anuncioModel.getStatus(), anuncioRequest.getCategoria())).thenReturn(List.of(anuncioModel));
-
-        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnunciosPorStatusECategorias(anuncioModel.getStatus(), anuncioRequest.getCategoria());
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(ArrayList.class, response.getBody().getClass());
-        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
-    }
-
-    //teste para alterar cadastro de anuncio
-    @Test
-    void quandoAlterarAnuncio_RetornarSucesso(){
-        when(anuncioService.alterarAnuncio(anuncioModel)).thenReturn(anuncioModel);
-        when(anuncioRequest.toAnuncioModel()).thenReturn(anuncioModel);
-
-        ResponseEntity<AnuncioResponse> response = anuncioController.alterarAnuncio(anuncioRequest, ID);
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(AnuncioResponse.class, response.getBody().getClass());
-    }
-
-    //teste para alterar status do anuncio
-    @Test
-    void quandoAlterarStatusAnuncio_RetornarSucesso(){
-        when(anuncioService.alterarStatusAnuncio(anuncioRequest.toAnuncioModel())).thenReturn(anuncioModel);
-        //when().thenReturn(anuncioModel);
-
-        ResponseEntity<AnuncioResponse> response = anuncioController.alterarStatusDoAnuncio(new AnuncioRequestStatusOnly(anuncioModel.getStatus()), ID);
-
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(ResponseEntity.class, response.getClass());
-        assertEquals(AnuncioResponse.class, response.getBody().getClass());
+    public void salvarNovoAnuncio_emCasoDeSucessoAoSalvar_deveRetornar201() throws Exception {
+        AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
+                1000, true, TECNOLOGIA, 1,
+                "PE", "PETROLINA", TRANSPORTADORA, 1L);
+        Mockito.when(anuncioService.cadastrarNovoAnuncio(any(), any())).thenReturn(anuncioRequest.toAnuncioModel());
+        this.mockMvc.perform(post("/anuncios")
+                        .content(asJsonString(anuncioRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated());
     }
 
 
@@ -185,13 +103,14 @@ class AnuncioControllerTest {
 
 
 
-//    public static String asJsonString(final Object obj) {
-//        try {
-//            return new ObjectMapper().writeValueAsString(obj);
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private void startAnuncio(){
         anuncioModel = new AnuncioModel(I_PHONE_11, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
