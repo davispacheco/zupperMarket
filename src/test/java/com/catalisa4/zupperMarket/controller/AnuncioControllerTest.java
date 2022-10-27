@@ -7,6 +7,7 @@ import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.service.AnuncioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.catalisa4.zupperMarket.enums.Categoria.TECNOLOGIA;
 import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
@@ -39,6 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class AnuncioControllerTest {
 
+    public static final int INDEX = 0;
     public static final Long ID = 1L;
     public static final String I_PHONE_11 = "IPhone11";
     //public static final String NOME_DO_TITULO = I_PHONE_11;
@@ -84,7 +89,19 @@ class AnuncioControllerTest {
         assertEquals(AnuncioModel.class, response.getBody().getClass());
     }
 
+    //teste para buscar lista de anuncios
+    @Test
+    void quandoBuscarPorAnuncios_RetornarListaDeAnuncios(){
+        when(anuncioService.buscarTodosAnuncios()).thenReturn(List.of(anuncioModel));
 
+        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnuncios();
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(ArrayList.class, response.getBody().getClass());
+        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
+    }
 
 
 /*    @Test
