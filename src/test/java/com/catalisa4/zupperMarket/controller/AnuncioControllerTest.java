@@ -163,6 +163,23 @@ class AnuncioControllerTest {
         assertEquals(AnuncioResponse.class, response.getBody().getClass());
     }
 
+    //teste para alterar status do anuncio
+    @Test
+    void quandoAlterarStatusAnuncio_RetornarSucesso(){
+        when(anuncioService.alterarStatusAnuncio(anuncioRequest.toAnuncioModel())).thenReturn(anuncioModel);
+        //when().thenReturn(anuncioModel);
+
+        ResponseEntity<AnuncioResponse> response = anuncioController.alterarStatusDoAnuncio(new AnuncioRequestStatusOnly(anuncioModel.getStatus()), ID);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(AnuncioResponse.class, response.getBody().getClass());
+    }
+
+
+
 
 
 
