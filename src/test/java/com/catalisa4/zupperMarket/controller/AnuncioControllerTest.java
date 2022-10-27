@@ -105,18 +105,18 @@ class AnuncioControllerTest {
     }
 
     //teste para buscar lista de anuncios
-//    @Test
-//    void quandoBuscarPorAnunciosPorStatus_RetornarStatus(){
-//        when(anuncioService.buscarPorStatus(status()).thenReturn(List.of(anuncioModel));
-//
-//        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnunciosPorStatus(status());
-//
-//        assertNotNull(response);
-//        assertNotNull(response.getBody());
-//        assertEquals(ResponseEntity.class, response.getClass());
-//        assertEquals(ArrayList.class, response.getBody().getClass());
-//        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
-//    }
+    @Test
+    void quandoBuscarPorAnunciosPorStatus_RetornarStatus(){
+        when(anuncioService.buscarPorStatus(anuncioModel.getStatus())).thenReturn(List.of(anuncioModel));
+
+        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnunciosPorStatus(anuncioModel.getStatus());
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(ArrayList.class, response.getBody().getClass());
+        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
+    }
 
     //teste para criar anuncio
     @Test
@@ -128,6 +128,20 @@ class AnuncioControllerTest {
         assertNotNull(response);
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+    //teste para buscar lista de anuncios
+    @Test
+    void quandoBuscarPorAnunciosPorStatusECategoria_RetornarStatusECategoria(){
+        when(anuncioService.buscarPorStatusECategoria(anuncioModel.getStatus(), anuncioRequest.getCategoria())).thenReturn(List.of(anuncioModel));
+
+        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnunciosPorStatusECategorias(anuncioModel.getStatus(), anuncioRequest.getCategoria());
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(ArrayList.class, response.getBody().getClass());
+        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
     }
 
 
