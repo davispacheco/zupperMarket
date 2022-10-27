@@ -34,6 +34,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -59,11 +60,13 @@ class AnuncioControllerTest {
     public static final String CIDADE = "São Paulo";
     public static final FormaDeEntrega FORMA_DE_ENTREGA = TRANSPORTADORA;
 
-    private AnuncioModel anuncioModel;
-    private AnuncioRequest anuncioRequest;
 
     @InjectMocks
     private AnuncioController anuncioController;
+
+    private AnuncioModel anuncioModel;
+    private AnuncioRequest anuncioRequest;
+
 
 //    @Autowired
 //    private MockMvc mockMvc;
@@ -104,7 +107,7 @@ class AnuncioControllerTest {
         assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
     }
 
-    //teste para buscar lista de anuncios
+    //teste para buscar lista de anuncios por status
     @Test
     void quandoBuscarPorAnunciosPorStatus_RetornarStatus(){
         when(anuncioService.buscarPorStatus(anuncioModel.getStatus())).thenReturn(List.of(anuncioModel));
@@ -122,6 +125,7 @@ class AnuncioControllerTest {
     @Test
     void quandoCriarAnuncio_RetornarCreated(){
         when(anuncioService.cadastrarNovoAnuncio(any(), anyLong())).thenReturn(anuncioModel);
+        when(anuncioRequest.toAnuncioModel()).thenReturn(anuncioModel);
 
         ResponseEntity<AnuncioResponse> response = anuncioController.cadastrarAnuncio(anuncioRequest);
 
@@ -130,7 +134,7 @@ class AnuncioControllerTest {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
-    //teste para buscar lista de anuncios
+    //teste para buscar lista de anuncios por status epor categoria
     @Test
     void quandoBuscarPorAnunciosPorStatusECategoria_RetornarStatusECategoria(){
         when(anuncioService.buscarPorStatusECategoria(anuncioModel.getStatus(), anuncioRequest.getCategoria())).thenReturn(List.of(anuncioModel));
@@ -143,6 +147,23 @@ class AnuncioControllerTest {
         assertEquals(ArrayList.class, response.getBody().getClass());
         assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
     }
+
+    //teste para alterar cadastro de anuncio
+    @Test
+    void quandoAlterarAnuncio_RetornarSucesso(){
+        when(anuncioService.alterarAnuncio(anuncioModel)).thenReturn(anuncioModel);
+        when(anuncioRequest.toAnuncioModel()).thenReturn(anuncioModel);
+
+        ResponseEntity<AnuncioResponse> response = anuncioController.alterarAnuncio(anuncioRequest, ID);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(AnuncioResponse.class, response.getBody().getClass());
+    }
+
+
 
 
 
