@@ -20,6 +20,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
@@ -103,24 +104,35 @@ class AnuncioControllerTest {
         assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
     }
 
-
-/*    @Test
-    public void salvarNovoAnuncio_emCasoDeSucessoAoSalvar_deveRetornar201() throws Exception {
-        AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
-                1000, true, TECNOLOGIA, 1,
-                "PE", "PETROLINA", TRANSPORTADORA, 1);
-
-        Mockito.when(anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel())).thenReturn(anuncioRequest.toAnuncioModel());
-        this.mockMvc.perform(post("/anuncios")
-                .content(asJsonString(anuncioRequest))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isCreated());
-
-
-    }*/
+    //teste para buscar lista de anuncios
+//    @Test
+//    void quandoBuscarPorAnunciosPorStatus_RetornarStatus(){
+//        when(anuncioService.buscarPorStatus(status()).thenReturn(List.of(anuncioModel));
 //
+//        ResponseEntity<List<AnuncioResponse>> response = anuncioController.buscarAnunciosPorStatus(status());
+//
+//        assertNotNull(response);
+//        assertNotNull(response.getBody());
+//        assertEquals(ResponseEntity.class, response.getClass());
+//        assertEquals(ArrayList.class, response.getBody().getClass());
+//        assertEquals(AnuncioResponse.class, response.getBody().get(INDEX).getClass());
+//    }
+
+    //teste para criar anuncio
+    @Test
+    void quandoCriarAnuncio_RetornarCreated(){
+        when(anuncioService.cadastrarNovoAnuncio(any(), anyLong())).thenReturn(anuncioModel);
+
+        ResponseEntity<AnuncioResponse> response = anuncioController.cadastrarAnuncio(anuncioRequest);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+
+
+
 //    public static String asJsonString(final Object obj) {
 //        try {
 //            return new ObjectMapper().writeValueAsString(obj);
