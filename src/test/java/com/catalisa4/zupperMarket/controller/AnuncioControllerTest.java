@@ -7,9 +7,11 @@ import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.service.AnuncioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,21 +20,28 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static com.catalisa4.zupperMarket.enums.Categoria.TECNOLOGIA;
 import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(AnuncioController.class)
-@AutoConfigureMockMvc
+//@WebMvcTest(AnuncioController.class)
+//@AutoConfigureMockMvc
 @SpringBootTest
 class AnuncioControllerTest {
 
+    public static final Long ID = 1L;
     public static final String I_PHONE_11 = "IPhone11";
-    public static final String NOME_DO_TITULO = I_PHONE_11;
+    //public static final String NOME_DO_TITULO = I_PHONE_11;
     public static final String DESCRICAO = "Em otimo estado";
     public static final String URL_FOTO = "url:qualquer";
     public static final String DESCRICAO_FOTO = "aparelho preto";
@@ -43,23 +52,36 @@ class AnuncioControllerTest {
     public static final String ESTADO = "SP";
     public static final String CIDADE = "São Paulo";
     public static final FormaDeEntrega FORMA_DE_ENTREGA = TRANSPORTADORA;
+
+    private AnuncioModel anuncioModel;
+    private AnuncioRequest anuncioRequest;
+
     @InjectMocks
     private AnuncioController anuncioController;
 
-    @Autowired
-    private MockMvc mockMvc;
+//    @Autowired
+//    private MockMvc mockMvc;
 
-    @MockBean
+    @Mock
     AnuncioService anuncioService;
-
-    private AnuncioModel anuncioModel;
-
-    private AnuncioRequest anuncioRequest;
 
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
         startAnuncio();
+    }
+
+    //teste de buscar anuncio por Id
+    @Test
+    void quandoBuscarPorId_RetornarSucesso(){
+        when(anuncioService.buscarPorId(anyLong())).thenReturn(anuncioModel);
+
+        ResponseEntity<AnuncioModel> response = anuncioController.buscarAnuncioPorId(ID);
+
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(ResponseEntity.class, response.getClass());
+        assertEquals(AnuncioModel.class, response.getBody().getClass());
     }
 
 
@@ -81,18 +103,18 @@ class AnuncioControllerTest {
 
 
     }*/
-
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+//
+//    public static String asJsonString(final Object obj) {
+//        try {
+//            return new ObjectMapper().writeValueAsString(obj);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     private void startAnuncio(){
-        anuncioModel = new AnuncioModel(NOME_DO_TITULO, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
-        //anuncioRequest = new AnuncioRequest(URL_FOTO, DESCRICAO_FOTO);
+        anuncioModel = new AnuncioModel(I_PHONE_11, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
+        //anuncioRequest = new AnuncioRequest();
     }
 
 }
