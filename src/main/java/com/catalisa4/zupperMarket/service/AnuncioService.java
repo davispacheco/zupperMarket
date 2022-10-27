@@ -59,6 +59,9 @@ public class AnuncioService {
         return iAnuncioRepository.save(anuncioModel);
     }
 
+    public AnuncioModel alterarStatusAnuncio(AnuncioModel anuncioModel) {
+        return iAnuncioRepository.save(anuncioModel);
+    }
 
     public void deletarAnuncio(Long id) {
         iAnuncioRepository.deleteById(id);

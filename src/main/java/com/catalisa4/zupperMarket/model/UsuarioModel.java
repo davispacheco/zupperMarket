@@ -47,5 +47,14 @@ public class UsuarioModel {
         this.senha = senha;
     }
 
+    public UsuarioModel(Long id, String nomeCompleto, String apelido, String email, String celular, String senha) {
+        this.id = id;
+        this.nomeCompleto = nomeCompleto;
+        this.apelido = apelido;
+        this.email = email;
+        this.celular = celular;
+        this.senha = senha;
+    }
+
 
 }

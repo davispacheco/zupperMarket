@@ -65,6 +65,10 @@ public class AnuncioModel {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private UsuarioModel usuario;
 
+    public AnuncioModel(Status status) {
+        this.status = status;
+    }
+
     public AnuncioModel(String nomeDoTitulo, String descricao, String urlFoto, String descricaoFoto, double valor,
                         boolean seNegociavel, Categoria categoria, int quantidade, String estado, String cidade,
                         FormaDeEntrega entrega) {

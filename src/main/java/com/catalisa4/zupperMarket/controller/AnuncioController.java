@@ -27,13 +27,13 @@ public class AnuncioController {
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(listaDeAnunciosModel));
     }
 
-    @GetMapping
+    @GetMapping(path = "/status")
     public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatus(@RequestParam Status status) {
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
 
-    @GetMapping
+    @GetMapping(path = "/categoria")
     public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatusECategorias(@RequestParam Status status, @RequestParam Categoria categoria){
         List<AnuncioModel> anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
@@ -54,6 +54,13 @@ public class AnuncioController {
     @PutMapping (path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest, @PathVariable Long id) {
         AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel());
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
+        return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
+    }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<AnuncioResponse> alterarStatusDoAnuncio(@RequestBody AnuncioRequestStatusOnly anuncioRequestStatusOnly, @PathVariable Long id) {
+        AnuncioModel anuncioAlterado = anuncioService.alterarStatusAnuncio(anuncioRequestStatusOnly.toAnuncioModel());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
