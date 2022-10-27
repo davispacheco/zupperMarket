@@ -15,6 +15,9 @@ public interface IAnuncioRepository extends JpaRepository<AnuncioModel, Long> {
     @Query("from AnuncioModel where status = :status")
     List<AnuncioModel> findByStatus(@Param("status") Status status);
 
+    @Query("from AnuncioModel where categoria = :categoria")
+    List<AnuncioModel> findByCategoria(@Param("categoria")  Categoria categoria);
+
     @Query("from AnuncioModel where status = :status and categoria = :categoria")
     List<AnuncioModel> findByStatusAndCategoria(@Param("status") Status status, @Param("categoria") Categoria categoria);
 }

@@ -35,8 +35,16 @@ public class AnuncioService {
         return obj.get();
     }
 
+    public List<AnuncioModel> buscarTodos() {
+        return iAnuncioRepository.findAll();
+    }
+
     public List<AnuncioModel> buscarPorStatus(Status status) {
         return iAnuncioRepository.findByStatus(status);
+    }
+
+    public List<AnuncioModel> buscarPorCategoria(Categoria categoria) {
+        return iAnuncioRepository.findByCategoria(categoria);
     }
 
     public List<AnuncioModel> buscarPorStatusECategoria(Status status, Categoria categoria) {
@@ -56,15 +64,17 @@ public class AnuncioService {
     }
 
     public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel, Long id) {
-        buscarPorId(id);
-        anuncioModel.setId(id);
+        AnuncioModel newAnuncio = buscarPorId(id);
+        anuncioModel.setStatus(newAnuncio.getStatus());
+        anuncioModel.setDataHoraCriacao(newAnuncio.getDataHoraCriacao());
+        anuncioModel.setUsuario(newAnuncio.getUsuario());
         return iAnuncioRepository.save(anuncioModel);
     }
 
     public AnuncioModel alterarStatusAnuncio(AnuncioModel anuncioModel, Long id) {
-        buscarPorId(id);
-        anuncioModel.setId(id);
-        return iAnuncioRepository.save(anuncioModel);
+        AnuncioModel newAnuncio = buscarPorId(id);
+        newAnuncio.setStatus(anuncioModel.getStatus());
+        return iAnuncioRepository.save(newAnuncio);
     }
 
     public void deletarAnuncio(Long id) {

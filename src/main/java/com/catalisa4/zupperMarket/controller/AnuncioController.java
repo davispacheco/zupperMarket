@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,45 +24,40 @@ public class AnuncioController {
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping
-    public ResponseEntity<List<AnuncioResponse>> buscarAnuncios (){
-        List<AnuncioModel> listaDeAnunciosModel = anuncioService.buscarTodosAnuncios();
-        return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(listaDeAnunciosModel));
-    }
-
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @GetMapping(path = "/status")
-    public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatus(@RequestParam Status status) {
-        List<AnuncioModel> anuncios = anuncioService.buscarPorStatus(status);
+    public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatusECategorias(@RequestParam(required = false) Status status, @RequestParam(required = false) Categoria categoria) {
+        List<AnuncioModel> anuncios;
+        if (status != null && categoria == null) {
+            anuncios = anuncioService.buscarPorStatus(status);
+        } else if (status == null && categoria != null) {
+            anuncios = anuncioService.buscarPorCategoria(categoria);
+        } else if (status != null && categoria != null) {
+            anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
+        } else {
+            anuncios = anuncioService.buscarTodosAnuncios();
+        }
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @GetMapping(path = "/categoria")
-    public ResponseEntity<List<AnuncioResponse>> buscarAnunciosPorStatusECategorias(@RequestParam Status status, @RequestParam Categoria categoria){
-        List<AnuncioModel> anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
-        return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
-    }
-
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @GetMapping (path = "/{id}")
-    public ResponseEntity<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id){
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id) {
         return ResponseEntity.ok(anuncioService.buscarPorId(id));
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping
-    public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@Valid @RequestBody AnuncioRequest anuncioRequest){
+    public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@Valid @RequestBody AnuncioRequest anuncioRequest) {
         AnuncioModel anuncio = anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel(), anuncioRequest.getUsuarioId());
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
         return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
-    @PutMapping (path = "/{id}")
+    @PutMapping(path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest, @PathVariable Long id) {
         AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel(), id);
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
-        return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
+        return ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
@@ -69,7 +65,7 @@ public class AnuncioController {
     public ResponseEntity<AnuncioResponse> alterarStatusDoAnuncio(@RequestBody AnuncioRequestStatusOnly anuncioRequestStatusOnly, @PathVariable Long id) {
         AnuncioModel anuncioAlterado = anuncioService.alterarStatusAnuncio(anuncioRequestStatusOnly.toAnuncioModel(), id);
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
-        return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
+        return ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
