@@ -55,11 +55,15 @@ public class AnuncioService {
         return iAnuncioRepository.save(anuncioModel);
     }
 
-    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel) {
+    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel, Long id) {
+        buscarPorId(id);
+        anuncioModel.setId(id);
         return iAnuncioRepository.save(anuncioModel);
     }
 
-    public AnuncioModel alterarStatusAnuncio(AnuncioModel anuncioModel) {
+    public AnuncioModel alterarStatusAnuncio(AnuncioModel anuncioModel, Long id) {
+        buscarPorId(id);
+        anuncioModel.setId(id);
         return iAnuncioRepository.save(anuncioModel);
     }
 

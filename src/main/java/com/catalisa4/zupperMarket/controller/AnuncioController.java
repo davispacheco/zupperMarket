@@ -59,7 +59,7 @@ public class AnuncioController {
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PutMapping (path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest, @PathVariable Long id) {
-        AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel());
+        AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel(), id);
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
@@ -67,7 +67,7 @@ public class AnuncioController {
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PatchMapping(path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarStatusDoAnuncio(@RequestBody AnuncioRequestStatusOnly anuncioRequestStatusOnly, @PathVariable Long id) {
-        AnuncioModel anuncioAlterado = anuncioService.alterarStatusAnuncio(anuncioRequestStatusOnly.toAnuncioModel());
+        AnuncioModel anuncioAlterado = anuncioService.alterarStatusAnuncio(anuncioRequestStatusOnly.toAnuncioModel(), id);
         AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
         return  ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
