@@ -47,6 +47,7 @@ public class AnuncioRequest {
     @NotNull(message = "Usuário deve ser preenchido.")
     private Long usuarioId;
 
+
     public AnuncioModel toAnuncioModel() {
         return new AnuncioModel(nomeDoTitulo, descricao, urlFoto, descricaoFoto, valor, seNegociavel, categoria,
                 quantidade, estado, cidade, entrega);

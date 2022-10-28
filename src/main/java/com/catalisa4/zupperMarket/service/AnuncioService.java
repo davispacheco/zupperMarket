@@ -35,32 +35,46 @@ public class AnuncioService {
         return obj.get();
     }
 
+    public List<AnuncioModel> buscarTodos() {
+        return iAnuncioRepository.findAll();
+    }
+
     public List<AnuncioModel> buscarPorStatus(Status status) {
         return iAnuncioRepository.findByStatus(status);
+    }
+
+    public List<AnuncioModel> buscarPorCategoria(Categoria categoria) {
+        return iAnuncioRepository.findByCategoria(categoria);
     }
 
     public List<AnuncioModel> buscarPorStatusECategoria(Status status, Categoria categoria) {
         return iAnuncioRepository.findByStatusAndCategoria(status, categoria);
     }
 
-    public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long id) {
+    public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long idUsuario) {
         anuncioModel.setStatus(Status.DISPONIVEL);
         anuncioModel.setDataHoraCriacao(LocalDateTime.now());
-        Optional<UsuarioModel> usuario = iUsuarioRepository.findById(id);
+        Optional<UsuarioModel> usuario = iUsuarioRepository.findById(idUsuario);
 
-        usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o id " + id + " não encontrado.")));
+        usuario.orElseThrow((() -> new EntityNotFoundException("Usuário com o idUsuario " + idUsuario + " não encontrado.")));
 
 
         anuncioModel.setUsuario(usuario.get());
         return iAnuncioRepository.save(anuncioModel);
     }
 
-    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel) {
+    public AnuncioModel alterarAnuncio(AnuncioModel anuncioModel, Long id) {
+        AnuncioModel newAnuncio = buscarPorId(id);
+        anuncioModel.setStatus(newAnuncio.getStatus());
+        anuncioModel.setDataHoraCriacao(newAnuncio.getDataHoraCriacao());
+        anuncioModel.setUsuario(newAnuncio.getUsuario());
         return iAnuncioRepository.save(anuncioModel);
     }
 
-    public AnuncioModel alterarStatusAnuncio(AnuncioModel anuncioModel) {
-        return iAnuncioRepository.save(anuncioModel);
+    public AnuncioModel alterarStatusAnuncio(AnuncioModel anuncioModel, Long id) {
+        AnuncioModel newAnuncio = buscarPorId(id);
+        newAnuncio.setStatus(anuncioModel.getStatus());
+        return iAnuncioRepository.save(newAnuncio);
     }
 
     public void deletarAnuncio(Long id) {
