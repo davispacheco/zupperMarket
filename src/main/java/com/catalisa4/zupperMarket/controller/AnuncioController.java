@@ -40,15 +40,16 @@ public class AnuncioController {
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @GetMapping(path = "/{id}")
-    public ResponseEntity<AnuncioModel> buscarAnuncioPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(anuncioService.buscarPorId(id));
+    public ResponseEntity<AnuncioResponseDetails> buscarAnuncioPorId(@PathVariable Long id) {
+        AnuncioModel anuncio = anuncioService.buscarPorId(id);
+        return ResponseEntity.ok(AnuncioResponseDetails.fromAnuncioModel(anuncio, anuncio.getUsuario()));
     }
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping
     public ResponseEntity<AnuncioResponse> cadastrarAnuncio(@Valid @RequestBody AnuncioRequest anuncioRequest) {
         AnuncioModel anuncio = anuncioService.cadastrarNovoAnuncio(anuncioRequest.toAnuncioModel(), anuncioRequest.getUsuarioId());
-        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio);
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncio, anuncio.getUsuario());
         return new ResponseEntity<>(anuncioResponse, HttpStatus.CREATED);
     }
 
@@ -56,7 +57,7 @@ public class AnuncioController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarAnuncio(@RequestBody AnuncioRequest anuncioRequest, @PathVariable Long id) {
         AnuncioModel anuncioAlterado = anuncioService.alterarAnuncio(anuncioRequest.toAnuncioModel(), id);
-        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado, anuncioAlterado.getUsuario());
         return ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 
@@ -64,7 +65,7 @@ public class AnuncioController {
     @PatchMapping(path = "/{id}")
     public ResponseEntity<AnuncioResponse> alterarStatusDoAnuncio(@RequestBody AnuncioRequestStatusOnly anuncioRequestStatusOnly, @PathVariable Long id) {
         AnuncioModel anuncioAlterado = anuncioService.alterarStatusAnuncio(anuncioRequestStatusOnly.toAnuncioModel(), id);
-        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado);
+        AnuncioResponse anuncioResponse = AnuncioResponse.fromAnuncioModel(anuncioAlterado, anuncioAlterado.getUsuario());
         return ResponseEntity.ok(anuncioResponse); //verificar se está correto
     }
 

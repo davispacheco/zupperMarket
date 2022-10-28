@@ -4,6 +4,7 @@ import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.enums.FormaDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
+import com.catalisa4.zupperMarket.model.UsuarioModel;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -37,18 +38,20 @@ public class AnuncioResponse {
 
     private Status status;
 
-    public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel) {
+    private UsuarioResponse usuario;
+
+    public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
         return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
                 anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
                 anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
-                anuncioModel.getStatus());
+                anuncioModel.getStatus(), UsuarioResponse.fromUsuarioModel(usuarioModel));
 
     }
 
     public static List<AnuncioResponse> fromAnuncioModelList(List<AnuncioModel> anuncios) {
         List<AnuncioResponse> novaLista = new ArrayList<>();
         for (AnuncioModel anuncio : anuncios) {
-            AnuncioResponse novoAnuncio = AnuncioResponse.fromAnuncioModel(anuncio);
+            AnuncioResponse novoAnuncio = AnuncioResponse.fromAnuncioModel(anuncio, anuncio.getUsuario());
             novaLista.add(novoAnuncio);
         }
         return novaLista;
