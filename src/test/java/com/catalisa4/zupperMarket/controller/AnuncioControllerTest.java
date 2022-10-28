@@ -99,14 +99,32 @@ class AnuncioControllerTest {
     }
 
     @Test
-    public void quandoBuscarAnuncioPorId_EmCadoDeSucesso_DeveRetornar201() throws Exception {
+    public void quandoBuscarAnuncioPorId_EmCasoDeSucesso_DeveRetornar201() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/anuncios/{id}", 1)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
-//.andReturn().getResponse().getContentAsString()
+
+    @Test
+    public void quandoBuscarTodosAnuncios_EmCadoDeSucesso_DeveRetornar201() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/anuncios", 1)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+    @Test
+    public void quandoBuscarTodosAnuncios_EmCasoDeSucesso_DeveRetornar201() throws Exception
+    {
+        mockMvc.perform( MockMvcRequestBuilders
+                        .get("/anuncios?status=DISPONIVEL&categoria=TECNOLOGIA")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 
 
 
