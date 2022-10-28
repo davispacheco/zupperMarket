@@ -30,14 +30,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.catalisa4.zupperMarket.enums.Categoria.GAMES;
 import static com.catalisa4.zupperMarket.enums.Categoria.TECNOLOGIA;
 import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -108,15 +108,16 @@ class AnuncioControllerTest {
     }
 
     @Test
-    public void quandoBuscarTodosAnuncios_EmCadoDeSucesso_DeveRetornar201() throws Exception {
+    public void quandoBuscarTodosAnuncios_EmCasoDeSucesso_DeveRetornar201() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/anuncios", 1)
+                        .get("/anuncios")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
     @Test
-    public void quandoBuscarTodosAnuncios_EmCasoDeSucesso_DeveRetornar201() throws Exception
+    public void quandoBuscarAnuncioPorStatusECategoria_EmCasoDeSucesso_DeveRetornar201() throws Exception
     {
         mockMvc.perform( MockMvcRequestBuilders
                         .get("/anuncios?status=DISPONIVEL&categoria=TECNOLOGIA")
@@ -125,6 +126,25 @@ class AnuncioControllerTest {
                 .andExpect(status().isOk());
     }
 
+//    @Test
+//    public void quandoAtualizarAnuncio_EmCasoDeSucesso_DeveRetornar200() throws Exception
+//    {
+//        mockMvc.perform( MockMvcRequestBuilders
+//                        .put("/anuncios/{id}", 1)
+//                        .content(asJsonString(new AnuncioRequest()))
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk());
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("firstName2"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("lastName2"))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("email2@mail.com"));
+//    }
+@Test
+public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Exception
+{
+    mockMvc.perform( MockMvcRequestBuilders.delete("/anuncios/{id}", 1) )
+            .andExpect(status().isNoContent());
+}
 
 
 
