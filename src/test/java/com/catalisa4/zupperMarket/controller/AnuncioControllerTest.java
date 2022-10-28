@@ -24,6 +24,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +89,7 @@ class AnuncioControllerTest {
         AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
                 1000, true, TECNOLOGIA, 1,
                 "PE", "PETROLINA", TRANSPORTADORA, 1L);
-        Mockito.when(anuncioService.cadastrarNovoAnuncio(any(), any())).thenReturn(anuncioRequest.toAnuncioModel());
+        when(anuncioService.cadastrarNovoAnuncio(any(), any())).thenReturn(anuncioRequest.toAnuncioModel());
         this.mockMvc.perform(post("/anuncios")
                         .content(asJsonString(anuncioRequest))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -95,6 +97,17 @@ class AnuncioControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
+
+    @Test
+    public void quandoBuscarAnuncioPorId_EmCadoDeSucesso_DeveRetornar201() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/anuncios/{id}", 1)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+//.andReturn().getResponse().getContentAsString()
+
 
 
 
