@@ -146,15 +146,6 @@ public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Except
             .andExpect(status().isNoContent());
 }
 
-
-
-
-
-
-
-
-
-
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
