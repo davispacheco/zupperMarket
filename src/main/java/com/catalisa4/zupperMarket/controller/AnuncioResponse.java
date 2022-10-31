@@ -48,14 +48,6 @@ public class AnuncioResponse {
 
     }
 
-    public static AnuncioResponse fromAnuncioModelWithUsuarioResponseDetails(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
-        return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
-                anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
-                anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
-                anuncioModel.getStatus(), UsuarioResponseDetails.fromUsuarioModel(usuarioModel));
-
-    }
-
     public static List<AnuncioResponse> fromAnuncioModelList(List<AnuncioModel> anuncios) {
         List<AnuncioResponse> novaLista = new ArrayList<>();
         for (AnuncioModel anuncio : anuncios) {
