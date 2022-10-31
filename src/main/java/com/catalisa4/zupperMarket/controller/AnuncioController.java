@@ -33,7 +33,7 @@ public class AnuncioController {
         } else if (status != null && categoria != null) {
             anuncios = anuncioService.buscarPorStatusECategoria(status, categoria);
         } else {
-            anuncios = anuncioService.buscarTodosAnuncios();
+            anuncios = anuncioService.buscarTodos();
         }
         return ResponseEntity.ok(AnuncioResponse.fromAnuncioModelList(anuncios));
     }
