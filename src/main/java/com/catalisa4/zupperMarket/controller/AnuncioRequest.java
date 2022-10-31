@@ -4,6 +4,7 @@ import com.catalisa4.zupperMarket.enums.Categoria;
 import com.catalisa4.zupperMarket.enums.FormaDeEntrega;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ public class AnuncioRequest {
     @NotBlank(message = "Anúncio deve conter descrição.")
     private String descricao;
 
+    @Length(max = 800, message = "URL da foto deve conter, no máximo, {max} caracteres.")
     private String urlFoto;
 
     private String descricaoFoto;
