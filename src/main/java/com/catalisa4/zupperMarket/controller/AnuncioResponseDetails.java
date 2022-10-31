@@ -51,13 +51,4 @@ public class AnuncioResponseDetails {
                 anuncioModel.getStatus(), UsuarioResponseDetails.fromUsuarioModel(usuarioModel));
 
     }
-
-    public static List<AnuncioResponseDetails> fromAnuncioModelList(List<AnuncioModel> anuncios) {
-        List<AnuncioResponseDetails> novaLista = new ArrayList<>();
-        for (AnuncioModel anuncio : anuncios) {
-            AnuncioResponseDetails novoAnuncio = AnuncioResponseDetails.fromAnuncioModel(anuncio, anuncio.getUsuario());
-            novaLista.add(novoAnuncio);
-        }
-        return novaLista;
-    }
 }
