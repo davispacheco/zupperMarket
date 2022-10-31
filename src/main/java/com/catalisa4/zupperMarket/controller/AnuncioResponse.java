@@ -38,7 +38,7 @@ public class AnuncioResponse {
 
     private Status status;
 
-    private UsuarioResponseDetails usuario;
+    private UsuarioResponse usuario;
 
     public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
         return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
