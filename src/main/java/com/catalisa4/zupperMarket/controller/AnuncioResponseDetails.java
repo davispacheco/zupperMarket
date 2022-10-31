@@ -5,18 +5,22 @@ import com.catalisa4.zupperMarket.enums.FormaDeEntrega;
 import com.catalisa4.zupperMarket.enums.Status;
 import com.catalisa4.zupperMarket.model.AnuncioModel;
 import com.catalisa4.zupperMarket.model.UsuarioModel;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-public class AnuncioResponse {
+public class AnuncioResponseDetails {
 
     private Long id;
 
     private String nomeDoTitulo;
+
+    private String descricao;
 
     private String urlFoto;
 
@@ -40,18 +44,18 @@ public class AnuncioResponse {
 
     private UsuarioResponse usuario;
 
-    public static AnuncioResponse fromAnuncioModel(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
-        return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
+    public static AnuncioResponseDetails fromAnuncioModel(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
+        return new AnuncioResponseDetails(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getDescricao(), anuncioModel.getUrlFoto(),
                 anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
                 anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
                 anuncioModel.getStatus(), UsuarioResponse.fromUsuarioModel(usuarioModel));
 
     }
 
-    public static List<AnuncioResponse> fromAnuncioModelList(List<AnuncioModel> anuncios) {
-        List<AnuncioResponse> novaLista = new ArrayList<>();
+    public static List<AnuncioResponseDetails> fromAnuncioModelList(List<AnuncioModel> anuncios) {
+        List<AnuncioResponseDetails> novaLista = new ArrayList<>();
         for (AnuncioModel anuncio : anuncios) {
-            AnuncioResponse novoAnuncio = AnuncioResponse.fromAnuncioModel(anuncio, anuncio.getUsuario());
+            AnuncioResponseDetails novoAnuncio = AnuncioResponseDetails.fromAnuncioModel(anuncio, anuncio.getUsuario());
             novaLista.add(novoAnuncio);
         }
         return novaLista;

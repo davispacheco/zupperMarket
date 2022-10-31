@@ -17,16 +17,18 @@ public class UsuarioResponse {
 
     private String apelido;
 
+    private String celular;
+
     private String email;
 
     public static UsuarioResponse fromUsuarioModel(UsuarioModel usuario) {
-        return new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getEmail());
+        return new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getCelular(), usuario.getEmail());
     }
 
     public static List<UsuarioResponse> fromUsuarioModelList(List<UsuarioModel> usuarios) {
         List<UsuarioResponse> novaLista = new ArrayList<>();
         for (UsuarioModel usuario : usuarios) {
-            UsuarioResponse novoUsuario = new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getEmail());
+            UsuarioResponse novoUsuario = UsuarioResponse.fromUsuarioModel(usuario);
             novaLista.add(novoUsuario);
         }
         return novaLista;
