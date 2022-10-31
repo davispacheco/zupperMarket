@@ -44,6 +44,14 @@ public class AnuncioResponse {
         return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
                 anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
                 anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
+                anuncioModel.getStatus(), UsuarioResponse.fromUsuarioModel(usuarioModel));
+
+    }
+
+    public static AnuncioResponse fromAnuncioModelWithUsuarioResponseDetails(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
+        return new AnuncioResponse(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getUrlFoto(),
+                anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
+                anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
                 anuncioModel.getStatus(), UsuarioResponseDetails.fromUsuarioModel(usuarioModel));
 
     }
