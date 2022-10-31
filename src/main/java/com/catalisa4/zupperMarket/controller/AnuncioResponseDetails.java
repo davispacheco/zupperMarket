@@ -42,13 +42,13 @@ public class AnuncioResponseDetails {
 
     private Status status;
 
-    private UsuarioResponse usuario;
+    private UsuarioResponseDetails usuario;
 
     public static AnuncioResponseDetails fromAnuncioModel(AnuncioModel anuncioModel, UsuarioModel usuarioModel) {
         return new AnuncioResponseDetails(anuncioModel.getId(), anuncioModel.getNomeDoTitulo(), anuncioModel.getDescricao(), anuncioModel.getUrlFoto(),
                 anuncioModel.getDescricaoFoto(), anuncioModel.getValor(), anuncioModel.isSeNegociavel(), anuncioModel.getCategoria(),
                 anuncioModel.getQuantidade(), anuncioModel.getEstado(), anuncioModel.getCidade(), anuncioModel.getEntrega(),
-                anuncioModel.getStatus(), UsuarioResponse.fromUsuarioModel(usuarioModel));
+                anuncioModel.getStatus(), UsuarioResponseDetails.fromUsuarioModel(usuarioModel));
 
     }
 

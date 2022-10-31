@@ -2,18 +2,14 @@ package com.catalisa4.zupperMarket.controller;
 
 import com.catalisa4.zupperMarket.model.UsuarioModel;
 import com.catalisa4.zupperMarket.service.UsuarioService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -51,7 +47,7 @@ public class UsuarioControllerTest {
     void quandoCadastrarUsuario_RetornarCreated(){
         when(usuarioService.cadastrar(any())).thenReturn(usuarioModel);
 
-        ResponseEntity<UsuarioResponse> response = usuarioController.cadastrarUsuario(usuarioRequest);
+        ResponseEntity<UsuarioResponseDetails> response = usuarioController.cadastrarUsuario(usuarioRequest);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(ResponseEntity.class, response.getClass());
