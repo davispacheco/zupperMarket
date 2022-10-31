@@ -25,16 +25,6 @@ public class AnuncioService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
 
-    public List<AnuncioModel> buscarTodosAnuncios() {
-        return iAnuncioRepository.findAll();
-    }
-
-    public AnuncioModel buscarPorId(Long id) {
-        Optional<AnuncioModel> obj = iAnuncioRepository.findById(id);
-        obj.orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado. " + id)));
-        return obj.get();
-    }
-
     public List<AnuncioModel> buscarTodos() {
         return iAnuncioRepository.findAll();
     }
@@ -49,6 +39,12 @@ public class AnuncioService {
 
     public List<AnuncioModel> buscarPorStatusECategoria(Status status, Categoria categoria) {
         return iAnuncioRepository.findByStatusAndCategoria(status, categoria);
+    }
+
+    public AnuncioModel buscarPorId(Long id) {
+        Optional<AnuncioModel> obj = iAnuncioRepository.findById(id);
+        obj.orElseThrow((() -> new EntityNotFoundException("Erro: id não encontrado. " + id)));
+        return obj.get();
     }
 
     public AnuncioModel cadastrarNovoAnuncio(AnuncioModel anuncioModel, Long idUsuario) {
