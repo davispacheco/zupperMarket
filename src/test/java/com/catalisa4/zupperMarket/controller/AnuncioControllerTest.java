@@ -128,17 +128,14 @@ class AnuncioControllerTest {
         AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
                 1000, true, TECNOLOGIA, 1,
                 "PE", "PETROLINA", TRANSPORTADORA, 1L);
-        when(anuncioService.alterarAnuncio(anuncioModel, ID)).thenReturn(anuncioRequest.toAnuncioModel());
+        when(anuncioService.alterarAnuncio(any(), anyLong())).thenReturn(anuncioRequest.toAnuncioModel());
         mockMvc.perform( MockMvcRequestBuilders
                         .put("/anuncios/{id}", 1L)
-                        .content(asJsonString(anuncioModel))
+                        .content(asJsonString(anuncioRequest))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("firstName2"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("lastName2"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("email2@mail.com"));
     }
 @Test
 public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Exception{
