@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,13 +63,12 @@ class AnuncioControllerTest {
     public static final String ESTADO = "SP";
     public static final String CIDADE = "São Paulo";
     public static final FormaDeEntrega FORMA_DE_ENTREGA = TRANSPORTADORA;
-
-
-
-
+    @Mock
     private AnuncioModel anuncioModel;
+    @Mock
     private AnuncioRequest anuncioRequest;
-
+    @InjectMocks
+    private AnuncioController anuncioController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -75,15 +76,11 @@ class AnuncioControllerTest {
     @MockBean
     private AnuncioService anuncioService;
 
-    @InjectMocks
-    private AnuncioController anuncioController;
-
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
         startAnuncio();
     }
-
     @Test
     public void salvarNovoAnuncio_emCasoDeSucessoAoSalvar_deveRetornar201() throws Exception {
         AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
@@ -117,8 +114,8 @@ class AnuncioControllerTest {
     }
 
     @Test
-    public void quandoBuscarAnuncioPorStatusECategoria_EmCasoDeSucesso_DeveRetornar201() throws Exception
-    {
+    public void quandoBuscarAnuncioPorStatusECategoria_EmCasoDeSucesso_DeveRetornar201() throws Exception {
+
         mockMvc.perform( MockMvcRequestBuilders
                         .get("/anuncios?status=DISPONIVEL&categoria=TECNOLOGIA")
                         .accept(MediaType.APPLICATION_JSON))
@@ -126,24 +123,31 @@ class AnuncioControllerTest {
                 .andExpect(status().isOk());
     }
 
-//    @Test
-//    public void quandoAtualizarAnuncio_EmCasoDeSucesso_DeveRetornar200() throws Exception
-//    {
-//        mockMvc.perform( MockMvcRequestBuilders
-//                        .put("/anuncios/{id}", 1)
-//                        .content(asJsonString(new AnuncioRequest()))
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk());
+    @Test
+    public void quandoAtualizarAnuncio_EmCasoDeSucesso_DeveRetornar200() throws Exception {
+        AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
+                1000, true, TECNOLOGIA, 1,
+                "PE", "PETROLINA", TRANSPORTADORA, 1L);
+        when(anuncioService.alterarAnuncio(anuncioModel, ID)).thenReturn(anuncioRequest.toAnuncioModel());
+        mockMvc.perform( MockMvcRequestBuilders
+                        .put("/anuncios/{id}", 1L)
+                        .content(asJsonString(anuncioModel))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse();
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("firstName2"))
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("lastName2"))
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("email2@mail.com"));
-//    }
+    }
 @Test
-public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Exception
-{
-    mockMvc.perform( MockMvcRequestBuilders.delete("/anuncios/{id}", 1) )
+public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Exception{
+    doNothing().when(anuncioService).deletarAnuncio(1L);
+    mockMvc.perform( MockMvcRequestBuilders.delete("/anuncios/{id}", 1L)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
+
 }
 
     public static String asJsonString(final Object obj) {
@@ -155,7 +159,7 @@ public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Except
     }
 
     private void startAnuncio(){
-        anuncioModel = new AnuncioModel(I_PHONE_11, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
+        anuncioModel = new AnuncioModel(ID, I_PHONE_11, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
         //anuncioRequest = new AnuncioRequest();
     }
 
