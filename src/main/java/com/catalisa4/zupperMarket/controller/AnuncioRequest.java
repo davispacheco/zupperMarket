@@ -15,14 +15,17 @@ import javax.validation.constraints.NotNull;
 public class AnuncioRequest {
 
     @NotBlank(message = "Anúncio deve conter título.")
+    @Length(max = 60, message = "Nome do título deve conter, no máximo, {max} caracteres.")
     private String nomeDoTitulo;
 
     @NotBlank(message = "Anúncio deve conter descrição.")
+    @Length(max = 300, message = "Descrição deve conter, no máximo, {max} caracteres.")
     private String descricao;
 
     @Length(max = 800, message = "URL da foto deve conter, no máximo, {max} caracteres.")
     private String urlFoto;
 
+    @Length(max = 300, message = "Descrição da foto deve conter, no máximo, {max} caracteres.")
     private String descricaoFoto;
 
     @NotNull(message = "Anúncio deve conter valor. Caso não tenha valor definido, coloque 0 (zero).")
@@ -38,9 +41,11 @@ public class AnuncioRequest {
     private int quantidade;
 
     @NotBlank(message = "Insira o estado onde o objeto ou serviço está localizado.")
+    @Length(max = 20, message = "Estado deve conter, no máximo, {max} caracteres.")
     private String estado;
 
     @NotBlank(message = "Insira a cidade onde o objeto ou serviço está localizado.")
+    @Length(max = 30, message = "Cidade deve conter, no máximo, {max} caracteres.")
     private String cidade;
 
     @NotNull(message = "Informe qual a forma de entrega do produto ou serviço.")
