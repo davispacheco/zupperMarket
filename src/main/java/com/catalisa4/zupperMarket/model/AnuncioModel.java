@@ -84,4 +84,7 @@ public class AnuncioModel {
         this.cidade = cidade;
         this.entrega = entrega;
     }
+
+    public AnuncioModel(Long id, String iPhone11, String descricao, String urlFoto, String descricaoFoto, int valor, boolean seNegociavel, Categoria categoria, int quantidade, String estado, String cidade, FormaDeEntrega formaDeEntrega) {
+    }
 }
