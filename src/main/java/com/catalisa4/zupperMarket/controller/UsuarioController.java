@@ -17,9 +17,9 @@ public class UsuarioController {
 
     @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping
-    public ResponseEntity<UsuarioResponse> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
+    public ResponseEntity<UsuarioResponseDetails> cadastrarUsuario(@Valid @RequestBody UsuarioRequest usuarioRequest) {
         UsuarioModel usuario = usuarioService.cadastrar(usuarioRequest.toUsuarioModel());
-        return new ResponseEntity<>(UsuarioResponse.fromUsuarioModel(usuario), HttpStatus.CREATED);
+        return new ResponseEntity<>(UsuarioResponseDetails.fromUsuarioModel(usuario), HttpStatus.CREATED);
     }
 
 

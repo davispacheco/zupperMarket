@@ -13,16 +13,10 @@ import java.util.List;
 public class UsuarioResponse {
     private Long id;
 
-    private String nomeCompleto;
-
     private String apelido;
 
-    private String celular;
-
-    private String email;
-
     public static UsuarioResponse fromUsuarioModel(UsuarioModel usuario) {
-        return new UsuarioResponse(usuario.getId(), usuario.getNomeCompleto(), usuario.getApelido(), usuario.getCelular(), usuario.getEmail());
+        return new UsuarioResponse(usuario.getId(), usuario.getApelido());
     }
 
     public static List<UsuarioResponse> fromUsuarioModelList(List<UsuarioModel> usuarios) {
