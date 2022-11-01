@@ -19,23 +19,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.catalisa4.zupperMarket.enums.Categoria.GAMES;
 import static com.catalisa4.zupperMarket.enums.Categoria.TECNOLOGIA;
 import static com.catalisa4.zupperMarket.enums.FormaDeEntrega.TRANSPORTADORA;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,13 +63,12 @@ class AnuncioControllerTest {
     public static final String ESTADO = "SP";
     public static final String CIDADE = "São Paulo";
     public static final FormaDeEntrega FORMA_DE_ENTREGA = TRANSPORTADORA;
-
-
-
-
+    @Mock
     private AnuncioModel anuncioModel;
+    @Mock
     private AnuncioRequest anuncioRequest;
-
+    @InjectMocks
+    private AnuncioController anuncioController;
 
     @Autowired
     private MockMvc mockMvc;
@@ -73,21 +76,17 @@ class AnuncioControllerTest {
     @MockBean
     private AnuncioService anuncioService;
 
-    @InjectMocks
-    private AnuncioController anuncioController;
-
     @BeforeEach
     void setUp(){
         MockitoAnnotations.openMocks(this);
         startAnuncio();
     }
-
     @Test
     public void salvarNovoAnuncio_emCasoDeSucessoAoSalvar_deveRetornar201() throws Exception {
         AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
                 1000, true, TECNOLOGIA, 1,
                 "PE", "PETROLINA", TRANSPORTADORA, 1L);
-        Mockito.when(anuncioService.cadastrarNovoAnuncio(any(), any())).thenReturn(anuncioRequest.toAnuncioModel());
+        when(anuncioService.cadastrarNovoAnuncio(any(), any())).thenReturn(anuncioRequest.toAnuncioModel());
         this.mockMvc.perform(post("/anuncios")
                         .content(asJsonString(anuncioRequest))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -96,13 +95,57 @@ class AnuncioControllerTest {
                 .andExpect(status().isCreated());
     }
 
+    @Test
+    public void quandoBuscarAnuncioPorId_EmCasoDeSucesso_DeveRetornar201() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/anuncios/{id}", 1)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
+    @Test
+    public void quandoBuscarTodosAnuncios_EmCasoDeSucesso_DeveRetornar201() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/anuncios")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
+    @Test
+    public void quandoBuscarAnuncioPorStatusECategoria_EmCasoDeSucesso_DeveRetornar201() throws Exception {
 
+        mockMvc.perform( MockMvcRequestBuilders
+                        .get("/anuncios?status=DISPONIVEL&categoria=TECNOLOGIA")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
+    @Test
+    public void quandoAtualizarAnuncio_EmCasoDeSucesso_DeveRetornar200() throws Exception {
+        AnuncioRequest anuncioRequest = new AnuncioRequest("Titulo", "esse é um bla", "http://celular.com", "tem um celular",
+                1000, true, TECNOLOGIA, 1,
+                "PE", "PETROLINA", TRANSPORTADORA, 1L);
+        when(anuncioService.alterarAnuncio(any(), anyLong())).thenReturn(anuncioRequest.toAnuncioModel());
+        mockMvc.perform( MockMvcRequestBuilders
+                        .put("/anuncios/{id}", 1L)
+                        .content(asJsonString(anuncioRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn().getResponse();
+    }
+@Test
+public void quandoDeletarAnuncio_EmCasoDeSucesso_DeveRetornar204() throws Exception{
+    doNothing().when(anuncioService).deletarAnuncio(1L);
+    mockMvc.perform( MockMvcRequestBuilders.delete("/anuncios/{id}", 1L)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNoContent());
 
-
-
+}
 
     public static String asJsonString(final Object obj) {
         try {
@@ -113,7 +156,7 @@ class AnuncioControllerTest {
     }
 
     private void startAnuncio(){
-        anuncioModel = new AnuncioModel(I_PHONE_11, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
+        anuncioModel = new AnuncioModel(ID, I_PHONE_11, DESCRICAO, URL_FOTO, DESCRICAO_FOTO, VALOR, SE_NEGOCIAVEL, CATEGORIA, QUANTIDADE, ESTADO, CIDADE, FORMA_DE_ENTREGA);
         //anuncioRequest = new AnuncioRequest();
     }
 
