@@ -91,7 +91,7 @@ public class AnuncioServiceTest {
         List<AnuncioModel> listTroca = new ArrayList<>();
         when(iAnuncioRepository.findAll()).thenReturn(listTroca);
         List<AnuncioModel> listTest = new ArrayList<>();
-        listTest = anuncioService.buscarTodosAnuncios();
+        listTest = anuncioService.buscarTodos();
         Assertions.assertEquals(listTest, listTroca);
 
     }
