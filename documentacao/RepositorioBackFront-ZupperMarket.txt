@@ -1,0 +1,5 @@
+Back-End:
+https://github.com/davispacheco/zupperMarket
+
+Front-End:
+https://github.com/vitoriajaco/frontend-zuppermarket

@@ -1,0 +1,1002 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": " 'O seu Mercado das Pulgas de um jeito diferente!' ",
+        "version": "1.0.0",
+        "title": "ZUPPER MARKET"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "anuncio-controller",
+            "description": "Anuncio Controller"
+        },
+        {
+            "name": "basic-error-controller",
+            "description": "Basic Error Controller"
+        },
+        {
+            "name": "usuario-controller",
+            "description": "Usuario Controller"
+        }
+    ],
+    "paths": {
+        "/anuncios": {
+            "get": {
+                "tags": [
+                    "anuncio-controller"
+                ],
+                "summary": "buscarAnunciosPorStatusECategorias",
+                "operationId": "buscarAnunciosPorStatusECategoriasUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "categoria",
+                        "in": "query",
+                        "description": "categoria",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "SERVICOS",
+                            "INGRESSOS",
+                            "MOVEIS",
+                            "VEICULOS",
+                            "TECNOLOGIA",
+                            "GAMES",
+                            "ELETRODOMESTICOS",
+                            "ESPORTE",
+                            "OUTROS"
+                        ]
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "status",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "DISPONIVEL",
+                            "ENCERRADO"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/AnuncioResponse"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "anuncio-controller"
+                ],
+                "summary": "cadastrarAnuncio",
+                "operationId": "cadastrarAnuncioUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "anuncioRequest",
+                        "description": "anuncioRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioResponse"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/anuncios/{id}": {
+            "get": {
+                "tags": [
+                    "anuncio-controller"
+                ],
+                "summary": "buscarAnuncioPorId",
+                "operationId": "buscarAnuncioPorIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioResponseDetails"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "anuncio-controller"
+                ],
+                "summary": "alterarAnuncio",
+                "operationId": "alterarAnuncioUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "anuncioRequest",
+                        "description": "anuncioRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioRequest"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioResponse"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "anuncio-controller"
+                ],
+                "summary": "deletarAnuncio",
+                "operationId": "deletarAnuncioUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "anuncio-controller"
+                ],
+                "summary": "alterarStatusDoAnuncio",
+                "operationId": "alterarStatusDoAnuncioUsingPATCH",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "anuncioRequestStatusOnly",
+                        "description": "anuncioRequestStatusOnly",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioRequestStatusOnly"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AnuncioResponse"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/error": {
+            "get": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingGET",
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "head": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingHEAD",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingDELETE",
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "options": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingOPTIONS",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "basic-error-controller"
+                ],
+                "summary": "errorHtml",
+                "operationId": "errorHtmlUsingPATCH",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ModelAndView"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/usuarios": {
+            "post": {
+                "tags": [
+                    "usuario-controller"
+                ],
+                "summary": "cadastrarUsuario",
+                "operationId": "cadastrarUsuarioUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "usuarioRequest",
+                        "description": "usuarioRequest",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UsuarioRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UsuarioResponseDetails"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/usuarios/{id}": {
+            "delete": {
+                "tags": [
+                    "usuario-controller"
+                ],
+                "summary": "deletarUsuario",
+                "operationId": "deletarUsuarioUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": {
+        "AnuncioRequest": {
+            "type": "object",
+            "properties": {
+                "categoria": {
+                    "type": "string",
+                    "enum": [
+                        "SERVICOS",
+                        "INGRESSOS",
+                        "MOVEIS",
+                        "VEICULOS",
+                        "TECNOLOGIA",
+                        "GAMES",
+                        "ELETRODOMESTICOS",
+                        "ESPORTE",
+                        "OUTROS"
+                    ]
+                },
+                "cidade": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "descricaoFoto": {
+                    "type": "string"
+                },
+                "entrega": {
+                    "type": "string",
+                    "enum": [
+                        "TRANSPORTADORA",
+                        "RETIRADANOLOCAL",
+                        "ENVIOPOREMAIL"
+                    ]
+                },
+                "estado": {
+                    "type": "string"
+                },
+                "nomeDoTitulo": {
+                    "type": "string"
+                },
+                "quantidade": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "seNegociavel": {
+                    "type": "boolean"
+                },
+                "urlFoto": {
+                    "type": "string"
+                },
+                "usuarioId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "valor": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "title": "AnuncioRequest"
+        },
+        "AnuncioRequestStatusOnly": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "DISPONIVEL",
+                        "ENCERRADO"
+                    ]
+                }
+            },
+            "title": "AnuncioRequestStatusOnly"
+        },
+        "AnuncioResponse": {
+            "type": "object",
+            "properties": {
+                "categoria": {
+                    "type": "string",
+                    "enum": [
+                        "SERVICOS",
+                        "INGRESSOS",
+                        "MOVEIS",
+                        "VEICULOS",
+                        "TECNOLOGIA",
+                        "GAMES",
+                        "ELETRODOMESTICOS",
+                        "ESPORTE",
+                        "OUTROS"
+                    ]
+                },
+                "cidade": {
+                    "type": "string"
+                },
+                "descricaoFoto": {
+                    "type": "string"
+                },
+                "entrega": {
+                    "type": "string",
+                    "enum": [
+                        "TRANSPORTADORA",
+                        "RETIRADANOLOCAL",
+                        "ENVIOPOREMAIL"
+                    ]
+                },
+                "estado": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "nomeDoTitulo": {
+                    "type": "string"
+                },
+                "quantidade": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "seNegociavel": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "DISPONIVEL",
+                        "ENCERRADO"
+                    ]
+                },
+                "urlFoto": {
+                    "type": "string"
+                },
+                "usuario": {
+                    "$ref": "#/definitions/UsuarioResponse"
+                },
+                "valor": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "title": "AnuncioResponse"
+        },
+        "AnuncioResponseDetails": {
+            "type": "object",
+            "properties": {
+                "categoria": {
+                    "type": "string",
+                    "enum": [
+                        "SERVICOS",
+                        "INGRESSOS",
+                        "MOVEIS",
+                        "VEICULOS",
+                        "TECNOLOGIA",
+                        "GAMES",
+                        "ELETRODOMESTICOS",
+                        "ESPORTE",
+                        "OUTROS"
+                    ]
+                },
+                "cidade": {
+                    "type": "string"
+                },
+                "descricao": {
+                    "type": "string"
+                },
+                "descricaoFoto": {
+                    "type": "string"
+                },
+                "entrega": {
+                    "type": "string",
+                    "enum": [
+                        "TRANSPORTADORA",
+                        "RETIRADANOLOCAL",
+                        "ENVIOPOREMAIL"
+                    ]
+                },
+                "estado": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "nomeDoTitulo": {
+                    "type": "string"
+                },
+                "quantidade": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "seNegociavel": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "DISPONIVEL",
+                        "ENCERRADO"
+                    ]
+                },
+                "urlFoto": {
+                    "type": "string"
+                },
+                "usuario": {
+                    "$ref": "#/definitions/UsuarioResponseDetails"
+                },
+                "valor": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "title": "AnuncioResponseDetails"
+        },
+        "ModelAndView": {
+            "type": "object",
+            "properties": {
+                "empty": {
+                    "type": "boolean"
+                },
+                "model": {
+                    "type": "object"
+                },
+                "modelMap": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "reference": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "100 CONTINUE",
+                        "101 SWITCHING_PROTOCOLS",
+                        "102 PROCESSING",
+                        "103 CHECKPOINT",
+                        "200 OK",
+                        "201 CREATED",
+                        "202 ACCEPTED",
+                        "203 NON_AUTHORITATIVE_INFORMATION",
+                        "204 NO_CONTENT",
+                        "205 RESET_CONTENT",
+                        "206 PARTIAL_CONTENT",
+                        "207 MULTI_STATUS",
+                        "208 ALREADY_REPORTED",
+                        "226 IM_USED",
+                        "300 MULTIPLE_CHOICES",
+                        "301 MOVED_PERMANENTLY",
+                        "302 FOUND",
+                        "302 MOVED_TEMPORARILY",
+                        "303 SEE_OTHER",
+                        "304 NOT_MODIFIED",
+                        "305 USE_PROXY",
+                        "307 TEMPORARY_REDIRECT",
+                        "308 PERMANENT_REDIRECT",
+                        "400 BAD_REQUEST",
+                        "401 UNAUTHORIZED",
+                        "402 PAYMENT_REQUIRED",
+                        "403 FORBIDDEN",
+                        "404 NOT_FOUND",
+                        "405 METHOD_NOT_ALLOWED",
+                        "406 NOT_ACCEPTABLE",
+                        "407 PROXY_AUTHENTICATION_REQUIRED",
+                        "408 REQUEST_TIMEOUT",
+                        "409 CONFLICT",
+                        "410 GONE",
+                        "411 LENGTH_REQUIRED",
+                        "412 PRECONDITION_FAILED",
+                        "413 PAYLOAD_TOO_LARGE",
+                        "413 REQUEST_ENTITY_TOO_LARGE",
+                        "414 URI_TOO_LONG",
+                        "414 REQUEST_URI_TOO_LONG",
+                        "415 UNSUPPORTED_MEDIA_TYPE",
+                        "416 REQUESTED_RANGE_NOT_SATISFIABLE",
+                        "417 EXPECTATION_FAILED",
+                        "418 I_AM_A_TEAPOT",
+                        "419 INSUFFICIENT_SPACE_ON_RESOURCE",
+                        "420 METHOD_FAILURE",
+                        "421 DESTINATION_LOCKED",
+                        "422 UNPROCESSABLE_ENTITY",
+                        "423 LOCKED",
+                        "424 FAILED_DEPENDENCY",
+                        "425 TOO_EARLY",
+                        "426 UPGRADE_REQUIRED",
+                        "428 PRECONDITION_REQUIRED",
+                        "429 TOO_MANY_REQUESTS",
+                        "431 REQUEST_HEADER_FIELDS_TOO_LARGE",
+                        "451 UNAVAILABLE_FOR_LEGAL_REASONS",
+                        "500 INTERNAL_SERVER_ERROR",
+                        "501 NOT_IMPLEMENTED",
+                        "502 BAD_GATEWAY",
+                        "503 SERVICE_UNAVAILABLE",
+                        "504 GATEWAY_TIMEOUT",
+                        "505 HTTP_VERSION_NOT_SUPPORTED",
+                        "506 VARIANT_ALSO_NEGOTIATES",
+                        "507 INSUFFICIENT_STORAGE",
+                        "508 LOOP_DETECTED",
+                        "509 BANDWIDTH_LIMIT_EXCEEDED",
+                        "510 NOT_EXTENDED",
+                        "511 NETWORK_AUTHENTICATION_REQUIRED"
+                    ]
+                },
+                "view": {
+                    "$ref": "#/definitions/View"
+                },
+                "viewName": {
+                    "type": "string"
+                }
+            },
+            "title": "ModelAndView"
+        },
+        "UsuarioRequest": {
+            "type": "object",
+            "properties": {
+                "apelido": {
+                    "type": "string"
+                },
+                "celular": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "nomeCompleto": {
+                    "type": "string"
+                },
+                "senha": {
+                    "type": "string"
+                }
+            },
+            "title": "UsuarioRequest"
+        },
+        "UsuarioResponse": {
+            "type": "object",
+            "properties": {
+                "apelido": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "title": "UsuarioResponse"
+        },
+        "UsuarioResponseDetails": {
+            "type": "object",
+            "properties": {
+                "apelido": {
+                    "type": "string"
+                },
+                "celular": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "nomeCompleto": {
+                    "type": "string"
+                }
+            },
+            "title": "UsuarioResponseDetails"
+        },
+        "View": {
+            "type": "object",
+            "properties": {
+                "contentType": {
+                    "type": "string"
+                }
+            },
+            "title": "View"
+        }
+    }
+}
